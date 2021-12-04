@@ -1,0 +1,17 @@
+.header {
+  padding-top: 45px;
+  color: #fff;
+  width: 100%;
+}
+
+.header::before {
+  border-bottom: 1px solid #545454;
+  box-sizing: border-box;
+  content: "";
+  z-index: 1;
+  position: absolute;
+  width: 880px;
+  min-height: 120px;
+  left: 200px;
+  top: 10px;
+}
