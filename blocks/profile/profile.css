@@ -1,3 +1,11 @@
 .profile {
   display: flex;
 }
+
+/* 768 */
+@media screen and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+}

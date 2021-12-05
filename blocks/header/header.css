@@ -1,18 +1,19 @@
 .header {
   margin-bottom: 81px;
   padding-top: 45px;
+  padding-bottom: 40px;
   color: #fff;
   width: 100%;
+  border-bottom: 1px solid #545454;
 }
 
-.header::before {
-  border-bottom: 1px solid #545454;
-  box-sizing: border-box;
-  content: "";
-  z-index: 1;
-  position: absolute;
-  width: 880px;
-  min-height: 120px;
-  left: 200px;
-  top: 0;
+@media screen and (max-width: 768px) {
+  .header {
+    width: 90%;
+    /* margin-top: 28px; */
+    margin-left: 27px;
+    margin-bottom: 75px;
+    padding-top: 28px;
+    padding-bottom: 32px;
+  }
 }
