@@ -1,0 +1,5 @@
+.profile__container {
+  display: flex;
+  min-width: 336px;
+  column-gap: 18px;
+}
