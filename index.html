@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
   <title>Mesto</title>
   <link rel="stylesheet" href="pages/index.css">
 </head>
+
 <body class="page">
   <!-- HEADER -->
   <header class="header">
@@ -24,10 +26,64 @@
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button type="button" class="profile__edit-button"></button>
         </div>
-          <p class="profile__description">Исследователь океана</p>
+        <p class="profile__description">Исследователь океана</p>
       </div>
       <button type="button" class="profile__add-button"></button>
     </section>
 
+    <!-- ELEMENTS -->
+    <section class="elements">
+      <ul class="elements__list">
+        <li class="element">
+          <img class="element__image" src="images/kamchatka.jpg" alt="Камчатка">
+          <div class="element__container">
+            <h2 class="element__title">Камчатка</h2>
+            <button type="button" class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/murmansk.jpg" alt="Мурманск">
+          <div class="element__container">
+            <h2 class="element__title">Мурманск</h2>
+            <button type="button" class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/baikal-lake.jpg" alt="Озеро Байкал зимой">
+          <div class="element__container">
+            <h2 class="element__title">Озеро Байкал</h2>
+            <button type="button" class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/altay.jpg" alt="Алтай">
+          <div class="element__container">
+            <h2 class="element__title">Алтай</h2>
+            <button type="button" class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/primorskiy-kray.jpg" alt="Приморский край">
+          <div class="element__container">
+            <h2 class="element__title">Приморский край</h2>
+            <button type="button" class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/poperechnaya-gora.jpg" alt="Поперечная гора. Башкирия">
+          <div class="element__container">
+            <h2 class="element__title">Башкирия</h2>
+            <button type="button" class="element__like-button"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <a href="#" class="footer__copyright">&#169; 2021. Mark G.</a>
+    </footer>
+  </main>
 </body>
+
 </html>
