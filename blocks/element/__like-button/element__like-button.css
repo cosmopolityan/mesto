@@ -9,6 +9,10 @@
     min-width: 24px;
     outline: none;
     padding: 0;
-    transition-duration: .2s;
-    transition-property: opacity background-image;
-}
+    transition-duration: .3s;
+    transition-property: opacity;
+  }
+
+  .element__like-button:hover {
+    opacity: .5;
+  }

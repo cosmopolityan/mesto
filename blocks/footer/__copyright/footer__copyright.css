@@ -3,6 +3,12 @@
   font-size: 18px;
   line-height: 22px;
   color: #545454;
+  transition-property: opacity;
+  transition-duration: .3s;
+}
+
+.footer__copyright:hover {
+  opacity: .8;
 }
 
 @media screen and (max-width: 767px) {
