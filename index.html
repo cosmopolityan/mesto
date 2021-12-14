@@ -24,7 +24,7 @@
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
+          <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
         </div>
         <p class="profile__description">Исследователь океана</p>
       </div>
@@ -82,21 +82,21 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <a href="#" class="footer__copyright">&#169; 2021. Mark G.</a>
+    <p class="footer__copyright">&#169; 2021. Mark G.</p>
   </footer>
 
   <!-- POPUP -->
-  <section class="popup">
-    <button type="reset" class="popup__close-button"></button>
+  <div class="popup">
     <div class="popup__container">
+      <button type="button" class="popup__close-button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
+      <form class="popup__form" name="form">
         <input type="text" class="popup__input" name="name" placeholder="Ваше имя" minlength="1" required>
         <input type="text" class="popup__input" name="job" placeholder="Кто Вы?" minlength="1">
         <button type="submit" class="popup__button">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
 
   <script src="scripts/script.js"></script>
 </body>
