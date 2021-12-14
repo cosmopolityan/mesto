@@ -6,13 +6,13 @@
   bottom: 0;
   left: 0;
   margin: auto;
-  max-width: calc(100vw - (19px*2));
+  /* max-width: calc(100vw - (19px*2));
   width: calc(1280px - (385px*2));
-  height: calc(720px - (155px*2));
+  height: calc(720px - (155px*2)); */
   align-items: flex-start;
 }
 
-.popup::before {
+/* .popup::before {
   position: fixed;
   top: 0;
   right: 0;
@@ -21,10 +21,10 @@
   content: '';
   background-color: rgba(0, 0, 0, .5);
   z-index: -1;
-}
+} */
 
 @media screen and (max-width: 767px) {
   .popup {
-    height: calc(768px - (19px*2));
+    /* height: calc(768px - (19px*2)); */
   }
 }
