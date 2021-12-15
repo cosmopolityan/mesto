@@ -7,10 +7,6 @@
   transition-duration: .3s;
 }
 
-.footer__copyright:hover {
-  opacity: .8;
-}
-
 @media screen and (max-width: 767px) {
   .footer__copyright {
     font-size: 14px;
