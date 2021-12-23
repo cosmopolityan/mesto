@@ -1,8 +1,11 @@
 let profileElement = document.querySelector('.profile');
 // Объявленная переменная = результат поиска секции .profile во всем документе.
 
+
 let editButton = profileElement.querySelector('.profile__edit-button');
 // Объявленная переменная = результат поиска кнопки .profile__edit-button в секции .profile.
+let addButton = profileElement.querySelector('.profile__add-button')
+// Объявленная переменная = результат поиска кнопки .profile__add-button в секции .profile.
 
 let nameElement = profileElement.querySelector('.profile__name');
 // Объявленная переменная = результат поиска поля .profile__name в секции .profile.
@@ -24,6 +27,11 @@ let nameInput = formElement.querySelector('.popup__input[name="name"]');
 // Объявленная переменная = результат поиска инпута .popup__input с id = name в форме .popup__form.
 let jobInput = formElement.querySelector('.popup__input[name="job"]');
 // Объявленная переменная = результат поиска инпута .popup__input с id = job в форме .popup__form.
+
+let titleInput = formElement.querySelector('.popup__input[name="title"]');
+// Объявленная переменная = результат поиска инпута .popup__input с id = title в форме .popup__form.
+let linkInput = formElement.querySelector('.popup__input[name="link"]');
+// Объявленная переменная = результат поиска инпута .popup__input с id = link в форме .popup__form.
 
 function popupToggle() {
   popupElement.classList.toggle(popupElementOpen);
@@ -50,6 +58,8 @@ function formSubmitHandler(evt) {
 // Функция "перезаписывает" имеющиеся значения на новые, введенные пользователем.
 
 editButton.addEventListener('click', popupOpen);
+// добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
+addButton.addEventListener('click', popupOpen);
 // добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
 closeButton.addEventListener('click', popupToggle);
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
