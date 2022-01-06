@@ -1,29 +1,67 @@
+
 const initialCards = [
   {
     name: 'Камчатка',
-    link: '../images/kamchatka.jpg'
+    link: 'images/kamchatka.jpg'
   },
   {
     name: 'Мурманск',
-    link: '../images/murmansk.jpg'
+    link: 'images/murmansk.jpg'
   },
   {
     name: 'Озеро Байкал',
-    link: '../images/baikal-lake.jpg'
+    link: 'images/baikal-lake.jpg'
   },
   {
     name: 'Алтай',
-    link: '../images/altay.jpg'
+    link: 'images/altay.jpg'
   },
   {
     name: 'Приморский край',
-    link: '../images/primorskiy-kray.jpg'
+    link: 'images/primorskiy-kray.jpg'
   },
   {
     name: 'Башкирия',
-    link: '../images/poperechnaya-gora.jpg'
+    link: 'images/poperechnaya-gora.jpg'
   }
 ];
+
+let photosList = document.querySelector('.elements__list');
+
+function addPhotosElement(name, link, where) {
+  const photosElement = document.querySelector('#element-template').content;
+  const photosCard = photosElement.cloneNode(true);
+  photosCard.querySelector('.element__image').src = link;
+  photosCard.querySelector('.element__image').alt = name;
+  photosCard.querySelector('.element__title').textContent = name;
+  photosList.append(photosCard);
+  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard)
+}
+
+function initializePhotos(arr) {
+  arr.forEach(elem => {
+    // addPhotosElement(elem.name, elem.link);
+    addPhotosElement(elem.name, elem.link, 'append');
+  });
+}
+
+initializePhotos(initialCards);
+
+const elementList = document.querySelector('.elements__list');
+
+
+// let table = document.getElementById("items");
+// var list = initialCards.map(function(element) {
+// return '<li class="element">' +
+//   '<img class="element__image" src=' + '"' + element.link + '"' + 'alt=' + element.name +
+//           '<div class="element__container">' +
+//             '<h2 class="element__title">'+ element.name +'</h2><button type="button" class="element__like-button"></button>' +
+//           '</div>' +
+//         '</li>'
+// }).join('');
+
+// table.innerHTML = list;
+
 
 let profileElement = document.querySelector('.profile');
 // Объявленная переменная = результат поиска секции .profile во всем документе.

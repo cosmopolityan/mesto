@@ -31,8 +31,11 @@
       <button type="button" class="profile__add-button"></button>
     </section>
 
+
+
+
     <!-- ELEMENTS -->
-    <section class="elements">
+    <!--  <section class="elements">
       <ul class="elements__list">
         <li class="element">
           <img class="element__image" src="images/kamchatka.jpg" alt="Камчатка">
@@ -77,7 +80,15 @@
           </div>
         </li>
       </ul>
+    </section> -->
+
+    <section class="elements">
+      <ul class="elements__list">
+        <!-- заполнение с помощью JS -->
+
+      </ul>
     </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -111,6 +122,32 @@
       </form>
     </div>
   </div>
+
+  <!-- ELEMENTS-Template -->
+  <template id="element-template">
+    <li class="element">
+      <img class="element__image">
+      <button type="reset" class="element__trash-button"></button>
+      <div class="element__container">
+        <h2 class="element__title"></h2>
+        <button type="button" class="element__like-button"></button>
+        <!-- <button type="button" class="element__delete-button"></button> -->
+      </div>
+    </li>
+  </template>
+
+  <!--
+  <template id="photos-element">
+    <li class="photos__card">
+      <figure class="photos__figure">
+        <img src="" alt="" class="photos__image">
+        <figcaption class="photos__figcaption"></figcaption>
+      </figure>
+      <button class="photos__delete-button" aria-label="удалить фотографию"></button>
+      <button class="photos__like-button" aria-label="поставить лайк"></button>
+    </li>
+  </template>
+  -->
 
   <script src="scripts/script.js"></script>
 </body>
