@@ -116,8 +116,8 @@
       <button type="button" class="popup__close-button"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="add-card_form">
-        <input type="text" class="popup__input" name="title" placeholder="Название">
-        <input type="url" class="popup__input" name="link" placeholder="Ссылка на картинку">
+        <input type="text" id="photo-name" class="popup__input" name="title" placeholder="Название">
+        <input type="url" id="photo-link" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
         <button type="submit" class="popup__button">Создать</button>
       </form>
     </div>
@@ -131,23 +131,9 @@
       <div class="element__container">
         <h2 class="element__title"></h2>
         <button type="button" class="element__like-button"></button>
-        <!-- <button type="button" class="element__delete-button"></button> -->
       </div>
     </li>
   </template>
-
-  <!--
-  <template id="photos-element">
-    <li class="photos__card">
-      <figure class="photos__figure">
-        <img src="" alt="" class="photos__image">
-        <figcaption class="photos__figcaption"></figcaption>
-      </figure>
-      <button class="photos__delete-button" aria-label="удалить фотографию"></button>
-      <button class="photos__like-button" aria-label="поставить лайк"></button>
-    </li>
-  </template>
-  -->
 
   <script src="scripts/script.js"></script>
 </body>

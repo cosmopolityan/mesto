@@ -1,4 +1,5 @@
 
+// Изначальный список карточек
 const initialCards = [
   {
     name: 'Камчатка',
@@ -34,13 +35,11 @@ function addPhotosElement(name, link, where) {
   photosCard.querySelector('.element__image').src = link;
   photosCard.querySelector('.element__image').alt = name;
   photosCard.querySelector('.element__title').textContent = name;
-  photosList.append(photosCard);
   where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard)
 }
 
 function initializePhotos(arr) {
   arr.forEach(elem => {
-    // addPhotosElement(elem.name, elem.link);
     addPhotosElement(elem.name, elem.link, 'append');
   });
 }
@@ -49,18 +48,31 @@ initializePhotos(initialCards);
 
 const elementList = document.querySelector('.elements__list');
 
+//
 
-// let table = document.getElementById("items");
-// var list = initialCards.map(function(element) {
-// return '<li class="element">' +
-//   '<img class="element__image" src=' + '"' + element.link + '"' + 'alt=' + element.name +
-//           '<div class="element__container">' +
-//             '<h2 class="element__title">'+ element.name +'</h2><button type="button" class="element__like-button"></button>' +
-//           '</div>' +
-//         '</li>'
-// }).join('');
+let popUpAdd = document.querySelector('#pop2');
 
-// table.innerHTML = list;
+function closePopUpAdd() {
+  emptyInputValue(inputPhotoName, inputPhotoLink);
+  popUpAdd.classList.remove('popup_opened');
+}
+
+function emptyInputValue(...inputs) {
+  inputs.map(elem => elem.value = '')
+}
+
+let addForm = document.querySelector('#pop2');
+let inputPhotoName = pop2.querySelector('#photo-name');
+let inputPhotoLink = pop2.querySelector('#photo-link');
+
+function addCard(evt) {
+  evt.preventDefault();
+  addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
+  emptyInputValue(inputPhotoName, inputPhotoLink);
+  closePopUpAdd()
+}
+
+//
 
 
 let profileElement = document.querySelector('.profile');
@@ -150,3 +162,5 @@ close2Button.addEventListener('click', popup2Toggle);
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
 form1Element.addEventListener('submit', formSubmitHandler);
 // добавленный ивентлиссенер по клику вызывает функцию formSubmitHandler -> отменяет стандартную отправку формы, устанавливает введенные пользователем значения в соотв. поля, перезаписывает их в DOM после нажатия кнопки 'Сохранить' [submit].
+
+addForm.addEventListener('submit', addCard);
