@@ -46,7 +46,7 @@ function initializePhotos(arr) {
 
 initializePhotos(initialCards);
 
-const elementList = document.querySelector('.elements__list');
+
 
 //
 
@@ -71,6 +71,18 @@ function addCard(evt) {
   emptyInputValue(inputPhotoName, inputPhotoLink);
   closePopUpAdd()
 }
+
+//
+let photosLikeButton = photosList.querySelectorAll('.element__like-button');
+
+function likePhoto(evt) {
+  evt.target.classList.toggle('element__like-button_active')
+}
+
+photosLikeButton.forEach(elem => {
+  elem.addEventListener('click', likePhoto);
+})
+
 
 //
 
@@ -151,6 +163,7 @@ function formSubmitHandler(evt) {
   popup1Toggle(); // '.popup popup_opened' => '.popup'
 }
 // Функция "перезаписывает" имеющиеся значения на новые, введенные пользователем.
+
 
 editButton.addEventListener('click', popup1Open);
 // добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
