@@ -32,10 +32,14 @@ let photosList = document.querySelector('.elements__list');
 function addPhotosElement(name, link, where) {
   const photosElement = document.querySelector('#element-template').content;
   const photosCard = photosElement.cloneNode(true);
+  const photosLikeButton = photosCard.querySelector('.element__like-button');
+  const photosDeleteButton = photosCard.querySelector('.element__trash-button');
   photosCard.querySelector('.element__image').src = link;
   photosCard.querySelector('.element__image').alt = name;
   photosCard.querySelector('.element__title').textContent = name;
-  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard)
+  photosLikeButton.addEventListener('click', likePhoto);
+  photosDeleteButton.addEventListener('click', deleteButton);
+  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
 }
 
 function initializePhotos(arr) {
@@ -74,6 +78,7 @@ function addCard(evt) {
 
 //
 let photosLikeButton = photosList.querySelectorAll('.element__like-button');
+//photosLikeButton.addEventListener('click', likePhoto);
 
 function likePhoto(evt) {
   evt.target.classList.toggle('element__like-button_active')
@@ -82,6 +87,19 @@ function likePhoto(evt) {
 photosLikeButton.forEach(elem => {
   elem.addEventListener('click', likePhoto);
 })
+
+let photosDeleteButton = photosList.querySelectorAll('.element__trash-button');
+//photosDeleteButton.addEventListener('click', deleteButton);
+
+function deleteButton(evt) {
+  evt.target.closest('.element').remove();
+}
+
+//photosDeleteButton.forEach(elem => {
+//  elem.addEventListener('click', function () {
+//    elem.closest('.element').remove()
+//  })
+//});
 
 
 //
