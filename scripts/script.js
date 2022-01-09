@@ -1,5 +1,4 @@
-
-// Изначальный список карточек
+// Начальный список карточек
 const initialCards = [
   {
     name: 'Камчатка',
@@ -27,20 +26,31 @@ const initialCards = [
   }
 ];
 
+//
+
 let photosList = document.querySelector('.elements__list');
+
+let popUpPhotos = document.querySelector('.popup-photo');
+let popUpPhotosImage = popUpPhotos.querySelector('.popup-photo__image');
+let popUpPhotosCaption = popUpPhotos.querySelector('.popup-photo__caption');
+let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-photo__close-button'); // popup__close-button
 
 function addPhotosElement(name, link, where) {
   const photosElement = document.querySelector('#element-template').content;
   const photosCard = photosElement.cloneNode(true);
+  const photosImage = photosCard.querySelector('.element__image');
   const photosLikeButton = photosCard.querySelector('.element__like-button');
   const photosDeleteButton = photosCard.querySelector('.element__trash-button');
   photosCard.querySelector('.element__image').src = link;
   photosCard.querySelector('.element__image').alt = name;
   photosCard.querySelector('.element__title').textContent = name;
+  photosImage.addEventListener('click', openPhoto); //
   photosLikeButton.addEventListener('click', likePhoto);
   photosDeleteButton.addEventListener('click', deleteButton);
   where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
 }
+
+//
 
 function initializePhotos(arr) {
   arr.forEach(elem => {
@@ -49,8 +59,6 @@ function initializePhotos(arr) {
 }
 
 initializePhotos(initialCards);
-
-
 
 //
 
@@ -94,16 +102,6 @@ let photosDeleteButton = photosList.querySelectorAll('.element__trash-button');
 function deleteButton(evt) {
   evt.target.closest('.element').remove();
 }
-
-//photosDeleteButton.forEach(elem => {
-//  elem.addEventListener('click', function () {
-//    elem.closest('.element').remove()
-//  })
-//});
-
-
-//
-
 
 let profileElement = document.querySelector('.profile');
 // Объявленная переменная = результат поиска секции .profile во всем документе.
@@ -181,6 +179,22 @@ function formSubmitHandler(evt) {
   popup1Toggle(); // '.popup popup_opened' => '.popup'
 }
 // Функция "перезаписывает" имеющиеся значения на новые, введенные пользователем.
+
+
+
+function openPhoto(evt) {
+  let box = evt.path[1];
+  let img = box.querySelector('.element__image');
+  let caption = box.querySelector('.element__title');
+  popUpPhotosImage.src = img.src;
+  popUpPhotosCaption.textContent = caption.textContent;
+  popUpPhotosCloseButton.addEventListener('click', closePhoto);
+  popUpPhotos.classList.add('popup_opened');
+}
+
+function closePhoto() {
+  popUpPhotos.classList.remove('popup_opened');
+}
 
 
 editButton.addEventListener('click', popup1Open);

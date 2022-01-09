@@ -31,60 +31,9 @@
       <button type="button" class="profile__add-button"></button>
     </section>
 
-
-
-
-    <!-- ELEMENTS -->
-    <!--  <section class="elements">
-      <ul class="elements__list">
-        <li class="element">
-          <img class="element__image" src="images/kamchatka.jpg" alt="Камчатка">
-          <div class="element__container">
-            <h2 class="element__title">Камчатка</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/murmansk.jpg" alt="Мурманск">
-          <div class="element__container">
-            <h2 class="element__title">Мурманск</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/baikal-lake.jpg" alt="Озеро Байкал зимой">
-          <div class="element__container">
-            <h2 class="element__title">Озеро Байкал</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/altay.jpg" alt="Алтай">
-          <div class="element__container">
-            <h2 class="element__title">Алтай</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/primorskiy-kray.jpg" alt="Приморский край">
-          <div class="element__container">
-            <h2 class="element__title">Приморский край</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/poperechnaya-gora.jpg" alt="Поперечная гора. Башкирия">
-          <div class="element__container">
-            <h2 class="element__title">Башкирия</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </li>
-      </ul>
-    </section> -->
-
+    <!-- Начальные карточки (заполнение с помощью JS) -->
     <section class="elements">
       <ul class="elements__list">
-        <!-- заполнение с помощью JS -->
 
       </ul>
     </section>
@@ -96,7 +45,7 @@
     <p class="footer__copyright">&#169; 2021. Mark G.</p>
   </footer>
 
-  <!-- POPUP -->
+  <!-- POPUPS -->
   <!-- edit-profile -->
   <div class="popup" id="pop1">
     <div class="popup__container">
@@ -116,10 +65,22 @@
       <button type="button" class="popup__close-button"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="add-card_form">
-        <input type="text" id="photo-name" class="popup__input" name="title" placeholder="Название">
+        <input type="text" id="photo-name" class="popup__input" name="title" placeholder="Название" maxlength="30">
         <input type="url" id="photo-link" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
         <button type="submit" class="popup__button">Создать</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Full-photo -->
+  <div class="popup popup-photo">
+    <div class="popup-photo__container">
+      <!-- popup__container -->
+      <figure class="photo__box popup-photo__box">
+        <img src="" class="popup-photo__image"> <!-- alt=""  -->
+        <figcaption class="popup-photo__caption"></figcaption>
+      </figure>
+      <button class="popup-photo__close-button"></button> <!-- popup__close-button -->
     </div>
   </div>
 
