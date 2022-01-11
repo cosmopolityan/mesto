@@ -62,7 +62,7 @@ initializePhotos(initialCards);
 
 //
 
-let popUpAdd = document.querySelector('#pop2');
+let popUpAdd = document.querySelector('#card_popup');
 
 function closePopUpAdd() {
   emptyInputValue(inputPhotoName, inputPhotoLink);
@@ -73,9 +73,9 @@ function emptyInputValue(...inputs) {
   inputs.map(elem => elem.value = '')
 }
 
-let addForm = document.querySelector('#pop2');
-let inputPhotoName = pop2.querySelector('#photo-name');
-let inputPhotoLink = pop2.querySelector('#photo-link');
+let addForm = document.querySelector('#card_popup');
+let inputPhotoName = card_popup.querySelector('#photo-name');
+let inputPhotoLink = card_popup.querySelector('#photo-link');
 
 function addCard(evt) {
   evt.preventDefault();
@@ -117,12 +117,12 @@ let nameElement = profileElement.querySelector('.profile__name');
 let jobElement = profileElement.querySelector('.profile__description');
 // Объявленная переменная = результат поиска поля .profile__description в секции .profile.
 
-let popup1Element = document.querySelector('#pop1');
-// Объявленная переменная = результат поиска секции с id #pop1 во всем документе.
+let popup1Element = document.querySelector('#profile_popup');
+// Объявленная переменная = результат поиска секции с id #profile_popup во всем документе.
 
 //06.01.22
-let popup2Element = document.querySelector('#pop2');
-// Объявленная переменная = результат поиска секции с id #pop2 во всем документе.
+let popup2Element = document.querySelector('#card_popup');
+// Объявленная переменная = результат поиска секции с id #card_popup во всем документе.
 
 const popup1ElementOpen = 'popup_opened';
 // Объявленная константа со значением класса, чтобы в дальнейшем передать ее как аргумент в функцию.
