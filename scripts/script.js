@@ -33,7 +33,7 @@ let photosList = document.querySelector('.elements__list');
 let popUpPhotos = document.querySelector('.popup-photo');
 let popUpPhotosImage = popUpPhotos.querySelector('.popup-photo__image');
 let popUpPhotosCaption = popUpPhotos.querySelector('.popup-photo__caption');
-let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-photo__close-button'); // popup__close-button
+let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup__close-button'); // popup-photo__close-button
 
 function addPhotosElement(name, link, where) {
   const photosElement = document.querySelector('#element-template').content;
