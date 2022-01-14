@@ -1,6 +1,6 @@
-// changelog 2022-01-12T22:12
-// 1. все переменные let исправлены на const;
-// 2. у всех картинок alt;
+// changelog 2022-01-14T02:47
+// 1. добавлен функционал закрытия попапов по кнопке 'Esc' или по клику на оверлей.
+
 
 // Начальный массив карточек-объектов
 const initialCards = [
@@ -38,6 +38,7 @@ const popupPhotos = document.querySelector('.popup-photo');
 const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
 const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
 const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button');
+const popups = document.querySelectorAll('.popup');
 
 function addPhotosElement(name, link, where) {
   const photosElement = document.querySelector('#element-template').content;
@@ -77,15 +78,32 @@ const popupAdd = document.querySelector('#card_popup');
 
 function openPopup(elem) {
   elem.classList.add('popup_opened');
+  document.addEventListener('keydown', closeEsc);
 }
 
 //
 
-// функция закрытия любого попапа
+// функция закрытия любого попапа (3 способа)
 
 function closePopup(elem) {
   elem.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeEsc);
 }
+
+function closeEsc (elem) {
+  if (elem.key === "Escape") {
+    const openPopup = document.querySelector('.popup_opened');
+    closePopup(openPopup);
+  }
+}
+
+popups.forEach(elem => {
+  elem.addEventListener('click', (evt => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(elem);
+    }
+  }));
+});
 
 //
 
@@ -101,6 +119,7 @@ function addCard(evt) {
   addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
   emptyInputValue(inputPhotoName, inputPhotoLink);
   closePopup(popupAdd);
+  closeEsc(popupAdd);
 }
 
 function likePhoto(evt) {
