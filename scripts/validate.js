@@ -1,21 +1,14 @@
-// Доброго времени суток, дорогой ревьюер!
-// Код не работает, я не понимаю почему.
-//
-// Я уже вконец отчаялся, я не понимаю почему errorElement'у не присваивается errorMessage, а выдает ошибку, хотя вроде бы все логично... По отдельности (просто querySelector(`.popup__error или popup__error_type_name) валидация прикрепляется к выбранному классу, а в функции это почему-то не получается реализовать, падает одна и та же ошибка. Очевидно, что можно под каждый инпут написать свои функции, просто чтобы оно хоть как-то работало, но это будет супер-неправильно и плохо.
-// Перечитал весь StackOverflow по этой ошибке, но там бОльшая часть комментатариев про то, что ошибка связана с отсутствуем класса в HTML, но это явно не мой случай у меня все есть, тогда почему не происходит связки, я теряюсь в догадках. Может еще какие-то классы надо присвоить всем полям...
-// Наверняка я чего-то супер-очевидного не вижу... Поэтому прошу о помощи, хотя бы о небольшой подсказке, если можно...
-
 const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`.popup__error_type_${inputElement.id}`);
   inputElement.classList.add(inputErrorClass);
-  errorElement.textContent = errorMessage; // Uncaught TypeError: Cannot set properties of null (setting 'textContent').
+  errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 
 const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`.popup__error_type_${inputElement.id}`);
   inputElement.classList.remove(inputErrorClass);
-  errorElement.textContent = ''; // Uncaught TypeError: Cannot set properties of null (setting 'textContent').
+  errorElement.textContent = '';
   errorElement.classList.remove(errorClass);
 };
 
@@ -35,9 +28,11 @@ const checkFormValidity = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
   if (checkFormValidity (inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.classList.add(inactiveButtonClass); //
+    buttonElement.setAttribute('disabled', true); //
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
   }
 };
 

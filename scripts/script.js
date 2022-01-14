@@ -111,7 +111,7 @@ function emptyInputValue(...inputs) {
   inputs.map(elem => elem.value = '');
 }
 
-const inputPhotoName = popupAdd.querySelector('#photo-name');
+const inputPhotoName = popupAdd.querySelector('#title');
 const inputPhotoLink = popupAdd.querySelector('#photo-link');
 
 function addCard(evt) {
@@ -120,6 +120,11 @@ function addCard(evt) {
   emptyInputValue(inputPhotoName, inputPhotoLink);
   closePopup(popupAdd);
   closeEsc(popupAdd);
+  // Код для того, чтобы после записи в DOM новых данных, после нажатия "Новое место", кнопка "Создать" была неактивна:
+  const addForm = document.querySelector('.popup__form[name="add-card_form"]');
+  const buttonElement = addForm.querySelector('.popup__button');
+  buttonElement.classList.add('popup__button_disabled');
+  buttonElement.setAttribute('disabled', true);
 }
 
 function likePhoto(evt) {
@@ -131,53 +136,34 @@ function deconsteButton(evt) {
 }
 
 const profileElement = document.querySelector('.profile');
-// Объявленная переменная = результат поиска секции .profile во всем документе.
-
 const editButton = profileElement.querySelector('.profile__edit-button');
-// Объявленная переменная = результат поиска кнопки .profile__edit-button в секции .profile.
 const addButton = profileElement.querySelector('.profile__add-button');
-// Объявленная переменная = результат поиска кнопки .profile__add-button в секции .profile.
-
 const nameElement = profileElement.querySelector('.profile__name');
-// Объявленная переменная = результат поиска поля .profile__name в секции .profile.
-
 const jobElement = profileElement.querySelector('.profile__description');
-// Объявленная переменная = результат поиска поля .profile__description в секции .profile.
-
 const profilePopup = document.querySelector('#profile_popup');
-// Объявленная переменная = результат поиска секции с id #profile_popup во всем документе.
-
 const profilePopupCloseButton = profilePopup.querySelector('.popup__close-button');
-// Объявленная переменная = результат поиска кнопки .popup__close-button в секции .popup.
 const editProfileForm = profilePopup.querySelector('.popup__form');
-// Объявленная переменная = результат поиска формы .popup__form в секции .popup.
-
 const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
-// Объявленная переменная = результат поиска кнопки .popup__close-button в секции .popup.
-
 const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
-// Объявленная переменная = результат поиска инпута .popup__input с id = name в форме .popup__form.
 const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
-// Объявленная переменная = результат поиска инпута .popup__input с id = job в форме .popup__form.
 
 function openProfilePopup() {
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
-// Без этих 2 строк, попап открывается, но в полях нет значений из DOM, только информация из placeholder'а.
-  openPopup(profilePopup); // '.popup' => '.popup popup_opened'
+  openPopup(profilePopup);
 }
-// Функция присваивает полям "вытянутые" из DOM значения в соотв. полях.
+
 
 function closeProfilePopup() {
   closePopup(profilePopup);
 }
 
 function openAddPopup() {
-  openPopup(popupAdd); // '.popup' => '.popup popup_opened'
+  openPopup(popupAdd);
 }
 
 function closeAddPopup() {
-  closePopup(popupAdd); // '.popup' => '.popup popup_opened'
+  closePopup(popupAdd);
 }
 
 function changeProfileData(evt) {
@@ -187,6 +173,11 @@ function changeProfileData(evt) {
   jobElement.textContent = jobInput.value;
 
   closePopup(profilePopup); // '.popup popup_opened' => '.popup'
+  // Код для того, чтобы после записи в DOM новых данных, после нажатия "Редактировать", кнопка "Сохранить" была неактивна:
+  const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
+  const buttonElement = editForm.querySelector('.popup__button');
+  buttonElement.classList.add('popup__button_disabled');
+  buttonElement.setAttribute('disabled', true);
 }
 
 function openPhoto(evt) {
