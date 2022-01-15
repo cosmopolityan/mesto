@@ -1,7 +1,3 @@
-// changelog 2022-01-14T02:47
-// 1. добавлен функционал закрытия попапов по кнопке 'Esc' или по клику на оверлей.
-
-
 // Начальный массив карточек-объектов
 const initialCards = [
   {
@@ -39,6 +35,10 @@ const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
 const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
 const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
+
+// const addFormSubmitBtn = document.querySelector('.popup__form[name="add-card_form"]');
+// const buttonElement = addFormSubmitBtn.querySelector('.popup__button');
+// не ищем кнопку, работаем с evt.submitter прямо в функции addCard(evt).
 
 function addPhotosElement(name, link, where) {
   const photosElement = document.querySelector('#element-template').content;
@@ -84,6 +84,7 @@ function openPopup(elem) {
 //
 
 // функция закрытия любого попапа (3 способа)
+// рабочий код, но нужно будет переписать более красиво и правильно ***
 
 function closePopup(elem) {
   elem.classList.remove('popup_opened');
@@ -98,12 +99,29 @@ function closeEsc (elem) {
 }
 
 popups.forEach(elem => {
-  elem.addEventListener('click', (evt => {
+  elem.addEventListener('mousedown', (evt => {
     if (evt.target.classList.contains('popup_opened')) {
       closePopup(elem);
     }
   }));
 });
+
+// ***
+
+// Разобраться как написать общую функцию для закрытия всех попапов 3 способами, без поисков каждой кнопки закрытия (общий класс = popup__close-button) в каждом существующем на данный момент и создаваемом в будущем попапе (общий класс = popup).
+
+// function closePopup() {
+//   popups.forEach((popup) => {
+//     popup.addEventListener('mousedown', (evt) => {
+//         if (evt.target.classList.contains('popup_opened')) {
+//             closePopup(popup)
+//         }
+//         if (evt.target.classList.contains('popup__close')) {
+//           closePopup(popup)
+//         }
+//     })
+//   })
+// };
 
 //
 
@@ -120,9 +138,7 @@ function addCard(evt) {
   emptyInputValue(inputPhotoName, inputPhotoLink);
   closePopup(popupAdd);
   closeEsc(popupAdd);
-  // Код для того, чтобы после записи в DOM новых данных, после нажатия "Новое место", кнопка "Создать" была неактивна:
-  const addForm = document.querySelector('.popup__form[name="add-card_form"]');
-  const buttonElement = addForm.querySelector('.popup__button');
+  const buttonElement = evt.submitter;
   buttonElement.classList.add('popup__button_disabled');
   buttonElement.setAttribute('disabled', true);
 }
@@ -173,11 +189,13 @@ function changeProfileData(evt) {
   jobElement.textContent = jobInput.value;
 
   closePopup(profilePopup); // '.popup popup_opened' => '.popup'
+  //
   // Код для того, чтобы после записи в DOM новых данных, после нажатия "Редактировать", кнопка "Сохранить" была неактивна:
-  const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
-  const buttonElement = editForm.querySelector('.popup__button');
-  buttonElement.classList.add('popup__button_disabled');
-  buttonElement.setAttribute('disabled', true);
+  // const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
+  // const buttonElement = editForm.querySelector('.popup__button');
+  // buttonElement.classList.add('popup__button_disabled');
+  // buttonElement.setAttribute('disabled', true);
+  //
 }
 
 function openPhoto(evt) {
@@ -200,11 +218,15 @@ editButton.addEventListener('click', openProfilePopup);
 addButton.addEventListener('click', openAddPopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
 profilePopupCloseButton.addEventListener('click', closeProfilePopup);
+
+
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
 popupAddCloseButton.addEventListener('click', closeAddPopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
 editProfileForm.addEventListener('submit', changeProfileData);
 // добавленный ивентлиссенер по клику вызывает функцию changeProfileData -> отменяет стандартную отправку формы, устанавливает введенные пользователем значения в соотв. поля, перезаписывает их в DOM после нажатия кнопки 'Сохранить' [submit].
+
 popupPhotosCloseButton.addEventListener('click', closePhoto);
+// popupPhotosCloseButton.addEventListener('click', closePopup(popupPhotos));
 
 popupAdd.addEventListener('submit', addCard);
