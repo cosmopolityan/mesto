@@ -1,3 +1,16 @@
+import Class from './Card.js';
+import FormValidator from './FormValidator.js';
+
+//
+const enableValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
 // Начальный массив карточек-объектов
 const initialCards = [
   {
@@ -163,6 +176,14 @@ const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
 const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
 const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
 
+// Валидация
+const EditValidator = new FormValidator (enableValidation, profilePopup);
+const AddValidator = new FormValidator (enableValidation, popupAdd);
+
+EditValidator.enableValidation()
+AddValidator.enableValidation();
+
+
 function openProfilePopup() {
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
@@ -212,6 +233,8 @@ function openPhoto(evt) {
 function closePhoto() {
   closePopup(popupPhotos);
 }
+
+// EventListener'ы
 
 editButton.addEventListener('click', openProfilePopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
