@@ -5,6 +5,15 @@
 // имеет публичный метод enableValidation, который включает валидацию формы.
 // Для каждой проверяемой формы создайте экземпляр класса FormValidator.
 
+export const enableValidation = ({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+});
+
 export default class FormValidator {
 
   constructor (enableValidation, formElement) {

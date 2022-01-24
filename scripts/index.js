@@ -1,15 +1,8 @@
-import Class from './Card.js';
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-
+import { enableValidation } from './FormValidator.js';
 //
-const enableValidation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-};
+
 
 // Начальный массив карточек-объектов
 const initialCards = [
@@ -53,36 +46,43 @@ const popups = document.querySelectorAll('.popup');
 // const buttonElement = addFormSubmitBtn.querySelector('.popup__button');
 // не ищем кнопку, работаем с evt.submitter прямо в функции addCard(evt).
 
-function addPhotosElement(name, link, where) {
-  const photosElement = document.querySelector('#element-template').content;
-  const photosCard = photosElement.cloneNode(true);
-  const photosImage = photosCard.querySelector('.element__image');
-  const photosLikeButton = photosCard.querySelector('.element__like-button');
-  const photosDeconsteButton = photosCard.querySelector('.element__trash-button');
-  photosImage.src = link;
-  photosImage.alt = name;
-  photosCard.querySelector('.element__title').textContent = name;
-  photosImage.addEventListener('click', openPhoto); //
-  // Будет лучше, если функция открытия модального окна с картинкой будет принимать название карточки и ссылку вместо события evt.
-  // Таким образом, Вам не придется брать данные из события, Вы сможете сразу устанавливать необходимые значения для картинки и заголовка.
-  // Для того чтобы передавать аргументы внутри колбэка, Вам следует воспользоваться стрелочной функцией:
-  // photosImage.addEventListener('click', () => openPhoto(item));
-  // Пока что не понял что openPhoto должен принимать в качестве аргумента (-ов). Все логически возможные варианты выдают в консоли одну и ту же ошибку (not defined). Или нужно переписывать еще саму функцию openPhoto, пока что непонятно.
-  photosLikeButton.addEventListener('click', likePhoto);
-  photosDeconsteButton.addEventListener('click', deconsteButton);
-  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
-}
+// function addPhotosElement(name, link, where) {
+//   const photosElement = document.querySelector('#element-template').content;
+//   const photosCard = photosElement.cloneNode(true);
+//   const photosImage = photosCard.querySelector('.element__image');
+//   const photosLikeButton = photosCard.querySelector('.element__like-button');
+//   const photosDeconsteButton = photosCard.querySelector('.element__trash-button');
+//   photosImage.src = link;
+//   photosImage.alt = name;
+//   photosCard.querySelector('.element__title').textContent = name;
+//   photosImage.addEventListener('click', openPhoto); //
+//   // Будет лучше, если функция открытия модального окна с картинкой будет принимать название карточки и ссылку вместо события evt.
+//   // Таким образом, Вам не придется брать данные из события, Вы сможете сразу устанавливать необходимые значения для картинки и заголовка.
+//   // Для того чтобы передавать аргументы внутри колбэка, Вам следует воспользоваться стрелочной функцией:
+//   // photosImage.addEventListener('click', () => openPhoto(item));
+//   // Пока что не понял что openPhoto должен принимать в качестве аргумента (-ов). Все логически возможные варианты выдают в консоли одну и ту же ошибку (not defined). Или нужно переписывать еще саму функцию openPhoto, пока что непонятно.
+//   photosLikeButton.addEventListener('click', likePhoto);
+//   photosDeconsteButton.addEventListener('click', deconsteButton);
+//   where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
+// }
 
 // Загрузка начальных карточек из массива.
 
-function initializePhotos(arr) {
-  arr.forEach(elem => {
-    addPhotosElement(elem.name, elem.link, 'append');
-  });
-}
+// function initializePhotos(arr) {
+//   arr.forEach(elem => {
+//     addPhotosElement(elem.name, elem.link, 'append');
+//   });
+// }
 
-initializePhotos(initialCards);
+// initializePhotos(initialCards);
 
+
+initialCards.forEach((item) => {
+  const card = new Card(item, '.template__element');
+  const cardElement = card._addPhotosElement();
+
+  photosList.append(cardElement);
+});
 //
 
 const popupAdd = document.querySelector('#card_popup');
@@ -145,24 +145,25 @@ function emptyInputValue(...inputs) {
 const inputPhotoName = popupAdd.querySelector('#title');
 const inputPhotoLink = popupAdd.querySelector('#photo-link');
 
-function addCard(evt) {
-  evt.preventDefault();
-  addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
-  emptyInputValue(inputPhotoName, inputPhotoLink);
-  closePopup(popupAdd);
-  closeEsc(popupAdd);
-  const buttonElement = evt.submitter;
-  buttonElement.classList.add('popup__button_disabled');
-  buttonElement.setAttribute('disabled', true);
-}
+// function addCard(evt) {
+//   evt.preventDefault();
+//   addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend'); //
+//   // Uncaught ReferenceError: addPhotosElement is not defined
+//   emptyInputValue(inputPhotoName, inputPhotoLink);
+//   closePopup(popupAdd);
+//   closeEsc(popupAdd);
+//   const buttonElement = evt.submitter;
+//   buttonElement.classList.add('popup__button_disabled');
+//   buttonElement.setAttribute('disabled', true);
+// }
 
-function likePhoto(evt) {
-  evt.target.classList.toggle('element__like-button_active');
-}
+// function likePhoto(evt) {
+//   evt.target.classList.toggle('element__like-button_active');
+// }
 
-function deconsteButton(evt) {
-  evt.target.closest('.element').remove();
-}
+// function deconsteButton(evt) {
+//   evt.target.closest('.element').remove();
+// }
 
 const profileElement = document.querySelector('.profile');
 const editButton = profileElement.querySelector('.profile__edit-button');
@@ -176,7 +177,7 @@ const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
 const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
 const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
 
-// Валидация
+// Валидация (не работает)
 const EditValidator = new FormValidator (enableValidation, profilePopup);
 const AddValidator = new FormValidator (enableValidation, popupAdd);
 
@@ -252,4 +253,4 @@ editProfileForm.addEventListener('submit', changeProfileData);
 popupPhotosCloseButton.addEventListener('click', closePhoto);
 // popupPhotosCloseButton.addEventListener('click', closePopup(popupPhotos));
 
-popupAdd.addEventListener('submit', addCard);
+// popupAdd.addEventListener('submit', addCard);
