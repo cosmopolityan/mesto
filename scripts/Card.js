@@ -8,8 +8,8 @@ import { openPopup } from './index.js';
 import { closePopup } from './index.js';
 
 const popupAdd = document.querySelector('#card_popup');
-const inputPhotoName = popupAdd.querySelector('#title');
-const inputPhotoLink = popupAdd.querySelector('#photo-link');
+const inputPhotoName = popupAdd.querySelector('#title'); //
+const inputPhotoLink = popupAdd.querySelector('#photo-link'); //
 const popupPhotos = document.querySelector('.popup-photo');
 const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
 const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
@@ -23,31 +23,36 @@ export default class Card {
     this._name = enableValidation.name;
   }
 
+  _emptyInputValue(...inputs) {
+    inputs.map(elem => elem.value = '');
+  }
+
   _getTemplate () {
     this._element = this._template.querySelector('.element').cloneNode(true);
   }
 
-  _addCard(evt) {
-    evt.preventDefault();
-    _addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
-    emptyInputValue(inputPhotoName, inputPhotoLink);
-    closePopup(popupAdd);
-    closeEsc(popupAdd);
-    const buttonElement = evt.submitter;
-    buttonElement.classList.add('popup__button_disabled');
-    buttonElement.setAttribute('disabled', true);
-
-  }
-  _addPhotosElement = () => {
+  addPhotosElement = () => {
     this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
+    this._element.querySelector('.element__image').alt = this._name;
+    this._element.querySelector('.element__image').src = this._link;
 
     return this._element;
   }
+
+  // _addCard(evt) {
+  //   evt.preventDefault();
+  //   // addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
+  //   // Uncaught ReferenceError: addPhotosElement is not defined
+  //   _emptyInputValue(inputPhotoName, inputPhotoLink);
+  //   closePopup(popupAdd);
+  //   closeEsc(popupAdd);
+  //   const buttonElement = evt.submitter;
+  //   buttonElement.classList.add('popup__button_disabled');
+  //   buttonElement.setAttribute('disabled', true);
+  // }
 
   _likePhoto(evt) {
     evt.target.classList.toggle('element__like-button_active');
@@ -85,9 +90,8 @@ export default class Card {
     const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button');
     popupPhotosCloseButton.addEventListener('click', this._closePhoto);
 
-
-    // const popupAdd = this._element.querySelector('#card_popup');
-    // popupAdd.addEventListener('submit', this._addCard);
+    const popupAdd = document.querySelector('#card_popup');
+    popupAdd.addEventListener('submit', this.addPhotosElement);
   }
 }
 

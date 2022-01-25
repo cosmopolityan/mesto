@@ -1,8 +1,17 @@
 import Card from './Card.js';
 // import { closePhoto } from './Card.js';
 import FormValidator from './FormValidator.js';
-import { enableValidation } from './FormValidator.js';
+// import { enableValidation } from './FormValidator.js';
 //
+
+const enableValidation = ({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+});
 
 
 // Начальный массив карточек-объектов
@@ -37,14 +46,18 @@ const initialCards = [
 
 const photosList = document.querySelector('.elements__list');
 
+const popupAdd = document.querySelector('#card_popup');
+const inputPhotoName = popupAdd.querySelector('#title');
+const inputPhotoLink = popupAdd.querySelector('#photo-link');
+
 const popupPhotos = document.querySelector('.popup-photo');
-const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
-const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
-const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button');
+// const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
+// const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
+// const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
 
-// const addFormSubmitBtn = document.querySelector('.popup__form[name="add-card_form"]');
-// const buttonElement = addFormSubmitBtn.querySelector('.popup__button');
+const addForm = document.querySelector('.popup__form[name="add-card_form"]');
+// const buttonElement = addForm.querySelector('.popup__button');
 // не ищем кнопку, работаем с evt.submitter прямо в функции addCard(evt).
 
 // function addPhotosElement(name, link, where) {
@@ -69,24 +82,27 @@ const popups = document.querySelectorAll('.popup');
 
 // Загрузка начальных карточек из массива.
 
-// function initializePhotos(arr) {
-//   arr.forEach(elem => {
-//     addPhotosElement(elem.name, elem.link, 'append');
-//   });
-// }
-
-// initializePhotos(initialCards);
-
-
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template__element');
-  const cardElement = card._addPhotosElement();
+  const card = new Card(item);
+  const cardElement = card.addPhotosElement();
 
   photosList.append(cardElement);
 });
+
+function cardSubmit(evt){
+  evt.preventDefault();
+
+  const card = new Card({name: inputPhotoName.value, link: inputPhotoLink.value});
+  const cardElement = card.addPhotosElement(); //
+
+  photosList.prepend(cardElement)
+
+  closePopup(popupAdd);
+  addForm.reset(); //
+}
 //
 
-const popupAdd = document.querySelector('#card_popup');
+// const popupAdd = document.querySelector('#card_popup');
 
 // функция открытия любого попапа
 
@@ -139,12 +155,12 @@ popups.forEach(elem => {
 
 //
 
-function emptyInputValue(...inputs) {
-  inputs.map(elem => elem.value = '');
-}
+// function emptyInputValue(...inputs) {
+//   inputs.map(elem => elem.value = '');
+// }
 
-const inputPhotoName = popupAdd.querySelector('#title');
-const inputPhotoLink = popupAdd.querySelector('#photo-link');
+// const inputPhotoName = popupAdd.querySelector('#title');
+// const inputPhotoLink = popupAdd.querySelector('#photo-link');
 
 // function addCard(evt) {
 //   evt.preventDefault();
@@ -177,6 +193,7 @@ const editProfileForm = profilePopup.querySelector('.popup__form');
 const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
 const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
 const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
+const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
 
 // Валидация (не работает)
 
@@ -194,7 +211,6 @@ function openProfilePopup() {
   jobInput.value = jobElement.textContent;
   openPopup(profilePopup);
 }
-
 
 function closeProfilePopup() {
   closePopup(profilePopup);
@@ -239,6 +255,26 @@ function changeProfileData(evt) {
 //   closePopup(popupPhotos);
 // }
 
+
+// ************************************************************************************************
+
+
+// editForm.addEventListener('submit', (evt) => {
+//   const inputList = Array.from(editForm.querySelectorAll(enableValidation.inputSelector));
+//   if (!EditValidator.checkFormValidity (inputList)) {
+//     changeProfileData(evt);
+//   }
+//   });
+
+// addForm.addEventListener('submit', (evt) => {
+//   const inputList = Array.from(addForm.querySelectorAll(enableValidation.inputSelector));
+//   if (!AddValidator.checkFormValidity (inputList)) {
+//     cardSubmit(evt);
+//   }
+//   });
+
+// ************************************************************************************************
+
 // EventListener'ы
 
 editButton.addEventListener('click', openProfilePopup);
@@ -254,7 +290,8 @@ popupAddCloseButton.addEventListener('click', closeAddPopup);
 editProfileForm.addEventListener('submit', changeProfileData);
 // добавленный ивентлиссенер по клику вызывает функцию changeProfileData -> отменяет стандартную отправку формы, устанавливает введенные пользователем значения в соотв. поля, перезаписывает их в DOM после нажатия кнопки 'Сохранить' [submit].
 
-popupPhotosCloseButton.addEventListener('click', closePhoto);
-// popupPhotosCloseButton.addEventListener('click', closePopup(popupPhotos));
+// popupPhotosCloseButton.addEventListener('click', closePhoto); //
 
-// popupAdd.addEventListener('submit', addCard);
+
+
+popupAdd.addEventListener('submit', cardSubmit);
