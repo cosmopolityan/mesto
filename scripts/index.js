@@ -1,4 +1,5 @@
 import Card from './Card.js';
+// import { closePhoto } from './Card.js';
 import FormValidator from './FormValidator.js';
 import { enableValidation } from './FormValidator.js';
 //
@@ -89,7 +90,7 @@ const popupAdd = document.querySelector('#card_popup');
 
 // функция открытия любого попапа
 
-function openPopup(elem) {
+export function openPopup(elem) {
   elem.classList.add('popup_opened');
   document.addEventListener('keydown', closeEsc);
 }
@@ -99,7 +100,7 @@ function openPopup(elem) {
 // функция закрытия любого попапа (3 способа)
 // рабочий код, но нужно будет переписать более красиво и правильно ***
 
-function closePopup(elem) {
+export function closePopup(elem) {
   elem.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeEsc);
 }
@@ -178,11 +179,14 @@ const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
 const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
 
 // Валидация (не работает)
+
 const EditValidator = new FormValidator (enableValidation, profilePopup);
 const AddValidator = new FormValidator (enableValidation, popupAdd);
 
 EditValidator.enableValidation()
 AddValidator.enableValidation();
+
+//
 
 
 function openProfilePopup() {
@@ -220,20 +224,20 @@ function changeProfileData(evt) {
   //
 }
 
-function openPhoto(evt) {
-  const box = evt.path[1];
-  const img = box.querySelector('.element__image');
-  const caption = box.querySelector('.element__title');
-  popupPhotosImage.src = img.src;
-  popupPhotosImage.alt = img.alt;
-  popupPhotosCaption.textContent = caption.textContent;
+// function openPhoto(evt) {
+//   const box = evt.path[1];
+//   const img = box.querySelector('.element__image');
+//   const caption = box.querySelector('.element__title');
+//   popupPhotosImage.src = img.src;
+//   popupPhotosImage.alt = img.alt;
+//   popupPhotosCaption.textContent = caption.textContent;
 
-  openPopup(popupPhotos);
-}
+//   openPopup(popupPhotos);
+// }
 
-function closePhoto() {
-  closePopup(popupPhotos);
-}
+// function closePhoto() {
+//   closePopup(popupPhotos);
+// }
 
 // EventListener'ы
 
