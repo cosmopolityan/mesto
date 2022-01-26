@@ -4,7 +4,7 @@ import FormValidator from './FormValidator.js';
 // import { enableValidation } from './FormValidator.js';
 //
 
-const enableValidation = ({
+export const enableValidation = ({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -95,7 +95,12 @@ function cardSubmit(evt){
   const card = new Card({name: inputPhotoName.value, link: inputPhotoLink.value});
   const cardElement = card.addPhotosElement(); //
 
+  // addValidator.setDisableButton(evt.submitter);
+  // addValidator.clearErrorElements();
+
   photosList.prepend(cardElement)
+
+  // const buttonElement = evt.submitter;
 
   closePopup(popupAdd);
   addForm.reset(); //
@@ -197,11 +202,11 @@ const editForm = document.querySelector('.popup__form[name="edit-profile_form"]'
 
 // Валидация (не работает)
 
-const EditValidator = new FormValidator (enableValidation, profilePopup);
-const AddValidator = new FormValidator (enableValidation, popupAdd);
+const editValidator = new FormValidator (enableValidation, profilePopup);
+const addValidator = new FormValidator (enableValidation, popupAdd);
 
-EditValidator.enableValidation()
-AddValidator.enableValidation();
+editValidator.enableValidation();
+addValidator.enableValidation();
 
 //
 
@@ -259,19 +264,19 @@ function changeProfileData(evt) {
 // ************************************************************************************************
 
 
-// editForm.addEventListener('submit', (evt) => {
-//   const inputList = Array.from(editForm.querySelectorAll(enableValidation.inputSelector));
-//   if (!EditValidator.checkFormValidity (inputList)) {
-//     changeProfileData(evt);
-//   }
-//   });
+editForm.addEventListener('submit', (evt) => {
+  // const inputList = Array.from(editForm.querySelectorAll(enableValidation.inputSelector));
+  if (!editValidator.checkFormValidity()) {
+    changeProfileData(evt);
+  }
+});
 
-// addForm.addEventListener('submit', (evt) => {
-//   const inputList = Array.from(addForm.querySelectorAll(enableValidation.inputSelector));
-//   if (!AddValidator.checkFormValidity (inputList)) {
-//     cardSubmit(evt);
-//   }
-//   });
+addForm.addEventListener('submit', (evt) => {
+  // const inputList = Array.from(addForm.querySelectorAll(enableValidation.inputSelector));
+  if (!addValidator.checkFormValidity()) {
+    cardSubmit(evt);
+  }
+});
 
 // ************************************************************************************************
 

@@ -5,14 +5,17 @@
 // имеет публичный метод enableValidation, который включает валидацию формы.
 // Для каждой проверяемой формы создайте экземпляр класса FormValidator.
 
-// export const enableValidation = ({
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_disabled',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__error_visible',
-// });
+
+// import { enableValidation } from './index.js';
+
+const enableValidation = ({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+});
 
 export default class FormValidator {
 
@@ -49,36 +52,63 @@ export default class FormValidator {
 
   checkFormValidity = (inputList) => {
     return inputList.some((inputElement) => {
+      // На этом месте всегда проблема: либо ошибка 1:
+      // Uncaught TypeError: Cannot read properties of undefined (reading 'some')
+      // Либо, если указывать без 'this._', ошибка 2:
+      // Uncaught ReferenceError: inputList is not defined
       return !inputElement.validity.valid;
     });
   };
 
+
+  setAbleButton = (buttonElement) => {
+    buttonElement.classList.remove(this._inactiveButtonClass);
+    buttonElement.disable = false;
+  }
+
+  setDisableButton = (buttonElement) => {
+    buttonElement.classList.add(this._inactiveButtonClass);
+    buttonElement.disable = true;
+  }
+
   _toggleButtonState = (buttonElement) => {
-    if (checkFormValidity (inputList)) {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.setAttribute('disabled', true);
+    if (this.checkFormValidity()) {
+      this.setDisableButton(buttonElement);
     } else {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.removeAttribute('disabled');
+      this.setAbleButton(buttonElement);
     }
   };
 
-  setEventListeners = () => {
-    const inputList = Array.from(this._formElement.querySelectorAll(inputSelector));
+  _setEventListeners = () => {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-    this._toggleButtonState (inputList, buttonElement);
+    this._toggleButtonState (buttonElement);
+
     inputList.forEach ((inputElement) => {
       inputElement.addEventListener ('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(buttonElement);
       });
     });
+
   };
 
   enableValidation = () => {
-    this._formElement.addEventListener('submit', function (evt) {
+    this._formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
         });
       this._setEventListeners;
   };
 };
+
+// clearErrorElements = () => {
+//   const errorList = Array.from(this._formElement.querySelectorAll('.popup__error'));
+//   errorList.forEach ((error) => {
+//     error.classList.remove(this._errorClass)
+//   });
+
+//   const errorInputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+//   errorInputList.forEach ((error) => {
+//     error.classList.remove(this._inputErrorClass)
+//   });
+// }
