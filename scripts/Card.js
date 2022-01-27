@@ -1,9 +1,4 @@
-// Создайте класс Card, который создаёт карточку с текстом и ссылкой на изображение:
-// принимает в конструктор её данные и селектор её template-элемента;
-// содержит приватные методы, которые работают с разметкой, устанавливают слушателей событий;
-// содержит приватные методы для каждого обработчика;
-// содержит один публичный метод, который возвращает полностью работоспособный и наполненный данными элемент карточки.
-// Для каждой карточки создайте экземпляр класса Card.
+
 import { openPopup } from './index.js';
 import { closePopup } from './index.js';
 
@@ -41,18 +36,6 @@ export default class Card {
 
     return this._element;
   }
-
-  // _addCard(evt) {
-  //   evt.preventDefault();
-  //   // addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
-  //   // Uncaught ReferenceError: addPhotosElement is not defined
-  //   _emptyInputValue(inputPhotoName, inputPhotoLink);
-  //   closePopup(popupAdd);
-  //   closeEsc(popupAdd);
-  //   const buttonElement = evt.submitter;
-  //   buttonElement.classList.add('popup__button_disabled');
-  //   buttonElement.setAttribute('disabled', true);
-  // }
 
   _likePhoto(evt) {
     evt.target.classList.toggle('element__like-button_active');

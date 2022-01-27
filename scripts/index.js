@@ -51,34 +51,9 @@ const inputPhotoName = popupAdd.querySelector('#title');
 const inputPhotoLink = popupAdd.querySelector('#photo-link');
 
 const popupPhotos = document.querySelector('.popup-photo');
-// const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
-// const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
-// const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
 
 const addForm = document.querySelector('.popup__form[name="add-card_form"]');
-// const buttonElement = addForm.querySelector('.popup__button');
-// не ищем кнопку, работаем с evt.submitter прямо в функции addCard(evt).
-
-// function addPhotosElement(name, link, where) {
-//   const photosElement = document.querySelector('#element-template').content;
-//   const photosCard = photosElement.cloneNode(true);
-//   const photosImage = photosCard.querySelector('.element__image');
-//   const photosLikeButton = photosCard.querySelector('.element__like-button');
-//   const photosDeconsteButton = photosCard.querySelector('.element__trash-button');
-//   photosImage.src = link;
-//   photosImage.alt = name;
-//   photosCard.querySelector('.element__title').textContent = name;
-//   photosImage.addEventListener('click', openPhoto); //
-//   // Будет лучше, если функция открытия модального окна с картинкой будет принимать название карточки и ссылку вместо события evt.
-//   // Таким образом, Вам не придется брать данные из события, Вы сможете сразу устанавливать необходимые значения для картинки и заголовка.
-//   // Для того чтобы передавать аргументы внутри колбэка, Вам следует воспользоваться стрелочной функцией:
-//   // photosImage.addEventListener('click', () => openPhoto(item));
-//   // Пока что не понял что openPhoto должен принимать в качестве аргумента (-ов). Все логически возможные варианты выдают в консоли одну и ту же ошибку (not defined). Или нужно переписывать еще саму функцию openPhoto, пока что непонятно.
-//   photosLikeButton.addEventListener('click', likePhoto);
-//   photosDeconsteButton.addEventListener('click', deconsteButton);
-//   where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
-// }
 
 // Загрузка начальных карточек из массива.
 
@@ -116,8 +91,6 @@ export function openPopup(elem) {
   document.addEventListener('keydown', closeEsc);
 }
 
-//
-
 // функция закрытия любого попапа (3 способа)
 // рабочий код, но нужно будет переписать более красиво и правильно ***
 
@@ -140,52 +113,6 @@ popups.forEach(elem => {
     }
   }));
 });
-
-// ***
-
-// Разобраться как написать общую функцию для закрытия всех попапов 3 способами, без поисков каждой кнопки закрытия (общий класс = popup__close-button) в каждом существующем на данный момент и создаваемом в будущем попапе (общий класс = popup).
-
-// function closePopup() {
-//   popups.forEach((popup) => {
-//     popup.addEventListener('mousedown', (evt) => {
-//         if (evt.target.classList.contains('popup_opened')) {
-//             closePopup(popup)
-//         }
-//         if (evt.target.classList.contains('popup__close')) {
-//           closePopup(popup)
-//         }
-//     })
-//   })
-// };
-
-//
-
-// function emptyInputValue(...inputs) {
-//   inputs.map(elem => elem.value = '');
-// }
-
-// const inputPhotoName = popupAdd.querySelector('#title');
-// const inputPhotoLink = popupAdd.querySelector('#photo-link');
-
-// function addCard(evt) {
-//   evt.preventDefault();
-//   addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend'); //
-//   // Uncaught ReferenceError: addPhotosElement is not defined
-//   emptyInputValue(inputPhotoName, inputPhotoLink);
-//   closePopup(popupAdd);
-//   closeEsc(popupAdd);
-//   const buttonElement = evt.submitter;
-//   buttonElement.classList.add('popup__button_disabled');
-//   buttonElement.setAttribute('disabled', true);
-// }
-
-// function likePhoto(evt) {
-//   evt.target.classList.toggle('element__like-button_active');
-// }
-
-// function deconsteButton(evt) {
-//   evt.target.closest('.element').remove();
-// }
 
 const profileElement = document.querySelector('.profile');
 const editButton = profileElement.querySelector('.profile__edit-button');
@@ -236,30 +163,8 @@ function changeProfileData(evt) {
   jobElement.textContent = jobInput.value;
 
   closePopup(profilePopup); // '.popup popup_opened' => '.popup'
-  //
-  // Код для того, чтобы после записи в DOM новых данных, после нажатия "Редактировать", кнопка "Сохранить" была неактивна:
-  // const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
-  // const buttonElement = editForm.querySelector('.popup__button');
-  // buttonElement.classList.add('popup__button_disabled');
-  // buttonElement.setAttribute('disabled', true);
-  //
+
 }
-
-// function openPhoto(evt) {
-//   const box = evt.path[1];
-//   const img = box.querySelector('.element__image');
-//   const caption = box.querySelector('.element__title');
-//   popupPhotosImage.src = img.src;
-//   popupPhotosImage.alt = img.alt;
-//   popupPhotosCaption.textContent = caption.textContent;
-
-//   openPopup(popupPhotos);
-// }
-
-// function closePhoto() {
-//   closePopup(popupPhotos);
-// }
-
 
 // ************************************************************************************************
 
@@ -296,7 +201,5 @@ editProfileForm.addEventListener('submit', changeProfileData);
 // добавленный ивентлиссенер по клику вызывает функцию changeProfileData -> отменяет стандартную отправку формы, устанавливает введенные пользователем значения в соотв. поля, перезаписывает их в DOM после нажатия кнопки 'Сохранить' [submit].
 
 // popupPhotosCloseButton.addEventListener('click', closePhoto); //
-
-
 
 popupAdd.addEventListener('submit', cardSubmit);
