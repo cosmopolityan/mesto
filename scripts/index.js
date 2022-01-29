@@ -1,17 +1,24 @@
+//
+// Refactoring:
+import { enableValidation } from './enableValidation.js';
+
+//
+
+//
 import Card from './Card.js';
 // import { closePhoto } from './Card.js';
 import FormValidator from './FormValidator.js';
 // import { enableValidation } from './FormValidator.js';
 //
 
-export const enableValidation = ({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-});
+// export const enableValidation = ({
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__input',
+//   submitButtonSelector: '.popup__button',
+//   inactiveButtonClass: 'popup__button_disabled',
+//   inputErrorClass: 'popup__input_type_error',
+//   errorClass: 'popup__error_visible',
+// });
 
 
 // Начальный массив карточек-объектов
