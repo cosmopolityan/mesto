@@ -53,7 +53,11 @@ const inputPhotoLink = popupAdd.querySelector('#photo-link');
 const popupPhotos = document.querySelector('.popup-photo');
 const popups = document.querySelectorAll('.popup');
 
+const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
 const addForm = document.querySelector('.popup__form[name="add-card_form"]');
+
+const submitEditButton = editForm.querySelector('#edit-profile-save-button');
+const submitAddButton = addForm.querySelector('#add-card-button');
 
 // Загрузка начальных карточек из массива.
 
@@ -70,8 +74,8 @@ function cardSubmit(evt){
   const card = new Card({name: inputPhotoName.value, link: inputPhotoLink.value});
   const cardElement = card.addPhotosElement(); //
 
-  // addValidator.setDisableButton(evt.submitter);
-  // addValidator.clearErrorElements();
+  addValidator.setDisableButton(submitAddButton)
+  addValidator.clearErrorElements();
 
   photosList.prepend(cardElement)
 
@@ -125,7 +129,7 @@ const editProfileForm = profilePopup.querySelector('.popup__form');
 const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
 const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
 const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
-const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
+
 
 // Валидация (не работает)
 
@@ -141,6 +145,9 @@ addValidator.enableValidation();
 function openProfilePopup() {
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
+
+  // editValidator.setDisableButton();
+
   openPopup(profilePopup);
 }
 
@@ -162,12 +169,14 @@ function changeProfileData(evt) {
   nameElement.textContent = nameInput.value;
   jobElement.textContent = jobInput.value;
 
+  editValidator.setAbleButton(submitEditButton) //
+  editValidator.clearErrorElements();
+
   closePopup(profilePopup); // '.popup popup_opened' => '.popup'
 
 }
 
 // ************************************************************************************************
-
 
 editForm.addEventListener('submit', (evt) => {
   // const inputList = Array.from(editForm.querySelectorAll(enableValidation.inputSelector));
@@ -203,3 +212,5 @@ editProfileForm.addEventListener('submit', changeProfileData);
 // popupPhotosCloseButton.addEventListener('click', closePhoto); //
 
 popupAdd.addEventListener('submit', cardSubmit);
+
+
