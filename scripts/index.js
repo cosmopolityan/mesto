@@ -1,6 +1,7 @@
 //
 // Refactoring:
 import { enableValidation } from './enableValidation.js';
+import { initialCards } from './initialCards.js';
 
 //
 
@@ -9,46 +10,6 @@ import Card from './Card.js';
 // import { closePhoto } from './Card.js';
 import FormValidator from './FormValidator.js';
 // import { enableValidation } from './FormValidator.js';
-//
-
-// export const enableValidation = ({
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_disabled',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__error_visible',
-// });
-
-
-// Начальный массив карточек-объектов
-const initialCards = [
-  {
-    name: 'Камчатка',
-    link: 'images/kamchatka.jpg'
-  },
-  {
-    name: 'Мурманск',
-    link: 'images/murmansk.jpg'
-  },
-  {
-    name: 'Озеро Байкал',
-    link: 'images/baikal-lake.jpg'
-  },
-  {
-    name: 'Алтай',
-    link: 'images/altay.jpg'
-  },
-  {
-    name: 'Приморский край',
-    link: 'images/primorskiy-kray.jpg'
-  },
-  {
-    name: 'Башкирия',
-    link: 'images/poperechnaya-gora.jpg'
-  }
-];
-
 //
 
 const photosList = document.querySelector('.elements__list');
