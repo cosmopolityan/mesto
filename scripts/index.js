@@ -2,6 +2,7 @@
 // Refactoring:
 import { enableValidation } from './enableValidation.js';
 import { initialCards } from './initialCards.js';
+import {photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, /* editProfileForm ,*/ popupAddCloseButton, nameInput, jobInput} from './consts.js';
 
 //
 
@@ -10,24 +11,8 @@ import Card from './Card.js';
 // import { closePhoto } from './Card.js';
 import FormValidator from './FormValidator.js';
 // import { enableValidation } from './FormValidator.js';
-//
 
-const photosList = document.querySelector('.elements__list');
-
-const popupAdd = document.querySelector('#card_popup');
-const inputPhotoName = popupAdd.querySelector('#title');
-const inputPhotoLink = popupAdd.querySelector('#photo-link');
-
-const popupPhotos = document.querySelector('.popup-photo');
-const popups = document.querySelectorAll('.popup');
-
-const editForm = document.querySelector('.popup__form[name="edit-profile_form"]');
-const addForm = document.querySelector('.popup__form[name="add-card_form"]');
-
-const submitEditButton = editForm.querySelector('#edit-profile-save-button');
-const submitAddButton = addForm.querySelector('#add-card-button');
-
-// Загрузка начальных карточек из массива.
+// Загрузка начальных карточек из массива
 
 initialCards.forEach((item) => {
   const card = new Card(item);
@@ -36,13 +21,15 @@ initialCards.forEach((item) => {
   photosList.append(cardElement);
 });
 
+// Добавление новой карточки
+
 function cardSubmit(evt){
   evt.preventDefault();
 
   const card = new Card({name: inputPhotoName.value, link: inputPhotoLink.value});
   const cardElement = card.addPhotosElement(); //
 
-  addValidator.setDisableButton(submitAddButton)
+  addValidator.setDisableButton(submitAddButton);
   addValidator.clearErrorElements();
 
   photosList.prepend(cardElement)
@@ -52,19 +39,15 @@ function cardSubmit(evt){
   closePopup(popupAdd);
   addForm.reset(); //
 }
-//
 
-// const popupAdd = document.querySelector('#card_popup');
-
-// функция открытия любого попапа
+// Открытие любого попапа
 
 export function openPopup(elem) {
   elem.classList.add('popup_opened');
   document.addEventListener('keydown', closeEsc);
 }
 
-// функция закрытия любого попапа (3 способа)
-// рабочий код, но нужно будет переписать более красиво и правильно ***
+// Закрытие любого попапа (3 способа)
 
 export function closePopup(elem) {
   elem.classList.remove('popup_opened');
@@ -85,19 +68,6 @@ popups.forEach(elem => {
     }
   }));
 });
-
-const profileElement = document.querySelector('.profile');
-const editButton = profileElement.querySelector('.profile__edit-button');
-const addButton = profileElement.querySelector('.profile__add-button');
-const nameElement = profileElement.querySelector('.profile__name');
-const jobElement = profileElement.querySelector('.profile__description');
-const profilePopup = document.querySelector('#profile_popup');
-const profilePopupCloseButton = profilePopup.querySelector('.popup__close-button');
-const editProfileForm = profilePopup.querySelector('.popup__form');
-const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
-const nameInput = editProfileForm.querySelector('.popup__input[name="name"]');
-const jobInput = editProfileForm.querySelector('.popup__input[name="job"]');
-
 
 // Валидация (не работает)
 
@@ -169,12 +139,10 @@ editButton.addEventListener('click', openProfilePopup);
 addButton.addEventListener('click', openAddPopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
 profilePopupCloseButton.addEventListener('click', closeProfilePopup);
-
-
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
 popupAddCloseButton.addEventListener('click', closeAddPopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
-editProfileForm.addEventListener('submit', changeProfileData);
+editForm.addEventListener('submit', changeProfileData);
 // добавленный ивентлиссенер по клику вызывает функцию changeProfileData -> отменяет стандартную отправку формы, устанавливает введенные пользователем значения в соотв. поля, перезаписывает их в DOM после нажатия кнопки 'Сохранить' [submit].
 
 // popupPhotosCloseButton.addEventListener('click', closePhoto); //
