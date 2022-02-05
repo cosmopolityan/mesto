@@ -20,18 +20,18 @@ export default class FormValidator {
     this._formElement = formElement;
   }
 
-  _setEventListeners = () => {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(buttonElement);
+  // _setEventListeners = () => {
+  //   const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+  //   const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+  //   this._toggleButtonState(buttonElement);
 
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', () => {
-        this._checkInputValidity(inputElement);
-        this._toggleButtonState(buttonElement);
-      });
-    });
-  };
+  //   inputList.forEach((inputElement) => {
+  //     inputElement.addEventListener('input', () => {
+  //       this._checkInputValidity(inputElement);
+  //       this._toggleButtonState(buttonElement);
+  //     });
+  //   });
+  // };
 
   _showInputError = (inputElement, errorMessage) => {
     const errorElement = this._formElement.querySelector(`.popup__error_type_${inputElement.id}`);
@@ -56,12 +56,8 @@ export default class FormValidator {
   };
 
   checkFormValidity = () => {
-    this.inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    // this.inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     return this.inputList.some((inputElement) => {
-      // На этом месте всегда проблема: либо ошибка 1:
-      // Uncaught TypeError: Cannot read properties of undefined (reading 'some')
-      // Либо, если указывать без 'this._', ошибка 2:
-      // Uncaught ReferenceError: inputList is not defined
       return !inputElement.validity.valid;
     });
   };
@@ -85,18 +81,18 @@ export default class FormValidator {
     }
   };
 
-  // _setEventListeners = () => {
-  //   const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-  //   const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-  //   this._toggleButtonState (buttonElement);
+  _setEventListeners = () => {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._toggleButtonState (buttonElement);
 
-  //   inputList.forEach ((inputElement) => {
-  //     inputElement.addEventListener ('input', () => {
-  //       this._checkInputValidity(inputElement);
-  //       this._toggleButtonState(buttonElement);
-  //     });
-  //   });
-  // };
+    inputList.forEach ((inputElement) => {
+      inputElement.addEventListener ('input', () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState(buttonElement);
+      });
+    });
+  };
 
   enableValidation = () => {
     this._formElement.addEventListener('submit', (evt) => {

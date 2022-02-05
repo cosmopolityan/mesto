@@ -31,7 +31,7 @@ initialCards.forEach((item) => {
 
 // Добавление новой карточки
 
-function cardSubmit(evt) {
+const cardSubmit = (evt) => {//
   evt.preventDefault();
 
   const card = new Card({ name: inputPhotoName.value, link: inputPhotoLink.value });
@@ -50,7 +50,7 @@ function cardSubmit(evt) {
 
 
 
-function openProfilePopup() {
+const openProfilePopup = () => {//
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
 
@@ -59,19 +59,19 @@ function openProfilePopup() {
   openPopup(profilePopup);
 }
 
-function closeProfilePopup() {
+const closeProfilePopup = () => {//
   closePopup(profilePopup);
 }
 
-function openAddPopup() {
+const openAddPopup = () => {//
   openPopup(popupAdd);
 }
 
-function closeAddPopup() {
+const closeAddPopup = () => {//
   closePopup(popupAdd);
 }
 
-function changeProfileData(evt) {
+const changeProfileData = (evt) => {//
   evt.preventDefault();
   // "перезаписываем" имеющиеся значения на новые, введенные пользователем:
   nameElement.textContent = nameInput.value;
