@@ -3,14 +3,23 @@
 import { enableValidation } from './enableValidation.js';
 import { initialCards } from './initialCards.js';
 import { photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, /* editProfileForm ,*/ popupAddCloseButton, nameInput, jobInput } from './consts.js';
-
-//
+import { openPopup, closePopup, closeEsc } from './utils.js'
 
 //
 import Card from './Card.js';
 // import { closePhoto } from './Card.js';
 import FormValidator from './FormValidator.js';
 // import { enableValidation } from './FormValidator.js';
+
+// Валидация (не работает)
+
+const editValidator = new FormValidator(enableValidation, profilePopup);
+const addValidator = new FormValidator(enableValidation, popupAdd);
+
+editValidator.enableValidation();
+addValidator.enableValidation();
+
+//
 
 // Загрузка начальных карточек из массива
 
@@ -28,8 +37,8 @@ function cardSubmit(evt) {
   const card = new Card({ name: inputPhotoName.value, link: inputPhotoLink.value });
   const cardElement = card.addPhotosElement(); //
 
-  addValidator.setDisableButton(submitAddButton);
-  addValidator.clearErrorElements();
+  // addValidator.setDisableButton(submitAddButton);
+  // addValidator.clearErrorElements();
 
   photosList.prepend(cardElement)
 
@@ -39,44 +48,6 @@ function cardSubmit(evt) {
   addForm.reset(); //
 }
 
-// Открытие любого попапа
-
-export function openPopup(elem) {
-  elem.classList.add('popup_opened');
-  document.addEventListener('keydown', closeEsc);
-}
-
-// Закрытие любого попапа (3 способа)
-
-export function closePopup(elem) {
-  elem.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeEsc);
-}
-
-function closeEsc(elem) {
-  if (elem.key === "Escape") {
-    const openPopup = document.querySelector('.popup_opened');
-    closePopup(openPopup);
-  }
-}
-
-popups.forEach(elem => {
-  elem.addEventListener('mousedown', (evt => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(elem);
-    }
-  }));
-});
-
-// Валидация (не работает)
-
-const editValidator = new FormValidator(enableValidation, profilePopup);
-const addValidator = new FormValidator(enableValidation, popupAdd);
-
-editValidator.enableValidation();
-addValidator.enableValidation();
-
-//
 
 
 function openProfilePopup() {

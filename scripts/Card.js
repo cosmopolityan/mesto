@@ -1,5 +1,5 @@
-import { openPopup } from './index.js';
-import { closePopup } from './index.js';
+import { openPopup } from './utils.js';
+import { closePopup } from './utils.js';
 
 const popupAdd = document.querySelector('#card_popup');
 const inputPhotoName = popupAdd.querySelector('#title'); //
