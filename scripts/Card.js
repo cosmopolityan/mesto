@@ -1,4 +1,3 @@
-
 import { openPopup } from './index.js';
 import { closePopup } from './index.js';
 
@@ -12,7 +11,7 @@ const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
 
 export default class Card {
 
-  constructor (enableValidation) {
+  constructor(enableValidation) {
     this._template = document.querySelector('#element-template').content;
     this._link = enableValidation.link;
     this._name = enableValidation.name;
@@ -22,7 +21,7 @@ export default class Card {
     inputs.map(elem => elem.value = '');
   }
 
-  _getTemplate () {
+  _getTemplate() {
     this._element = this._template.querySelector('.element').cloneNode(true);
   }
 
@@ -60,7 +59,7 @@ export default class Card {
     closePopup(popupPhotos);
   }
 
-  _setEventListeners () {
+  _setEventListeners() {
     const likeButton = this._element.querySelector('.element__like-button');
     likeButton.addEventListener('click', this._likePhoto);
 
@@ -77,12 +76,3 @@ export default class Card {
     popupAdd.addEventListener('submit', this.addPhotosElement);
   }
 }
-
-
-
-
-
-
-
-
-

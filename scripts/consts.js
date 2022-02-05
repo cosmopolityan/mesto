@@ -26,4 +26,4 @@ const nameInput = editForm.querySelector('.popup__input[name="name"]'); // по�
 const jobInput = editForm.querySelector('.popup__input[name="job"]'); // поле инпута (Профессия) в форме редактирования профиля
 
 
-export {photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, /* editProfileForm ,*/ popupAddCloseButton, nameInput, jobInput};
+export { photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, /* editProfileForm ,*/ popupAddCloseButton, nameInput, jobInput };

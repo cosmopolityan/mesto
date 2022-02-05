@@ -2,7 +2,7 @@
 // Refactoring:
 import { enableValidation } from './enableValidation.js';
 import { initialCards } from './initialCards.js';
-import {photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, /* editProfileForm ,*/ popupAddCloseButton, nameInput, jobInput} from './consts.js';
+import { photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, /* editProfileForm ,*/ popupAddCloseButton, nameInput, jobInput } from './consts.js';
 
 //
 
@@ -15,18 +15,18 @@ import FormValidator from './FormValidator.js';
 // Загрузка начальных карточек из массива
 
 initialCards.forEach((item) => {
+  const
   const card = new Card(item);
   const cardElement = card.addPhotosElement();
-
   photosList.append(cardElement);
 });
 
 // Добавление новой карточки
 
-function cardSubmit(evt){
+function cardSubmit(evt) {
   evt.preventDefault();
 
-  const card = new Card({name: inputPhotoName.value, link: inputPhotoLink.value});
+  const card = new Card({ name: inputPhotoName.value, link: inputPhotoLink.value });
   const cardElement = card.addPhotosElement(); //
 
   addValidator.setDisableButton(submitAddButton);
@@ -54,7 +54,7 @@ export function closePopup(elem) {
   document.removeEventListener('keydown', closeEsc);
 }
 
-function closeEsc (elem) {
+function closeEsc(elem) {
   if (elem.key === "Escape") {
     const openPopup = document.querySelector('.popup_opened');
     closePopup(openPopup);
@@ -71,8 +71,8 @@ popups.forEach(elem => {
 
 // Валидация (не работает)
 
-const editValidator = new FormValidator (enableValidation, profilePopup);
-const addValidator = new FormValidator (enableValidation, popupAdd);
+const editValidator = new FormValidator(enableValidation, profilePopup);
+const addValidator = new FormValidator(enableValidation, popupAdd);
 
 editValidator.enableValidation();
 addValidator.enableValidation();
@@ -148,5 +148,3 @@ editForm.addEventListener('submit', changeProfileData);
 // popupPhotosCloseButton.addEventListener('click', closePhoto); //
 
 popupAdd.addEventListener('submit', cardSubmit);
-
-
