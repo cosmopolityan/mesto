@@ -15,7 +15,6 @@ import FormValidator from './FormValidator.js';
 // Загрузка начальных карточек из массива
 
 initialCards.forEach((item) => {
-  const
   const card = new Card(item);
   const cardElement = card.addPhotosElement();
   photosList.append(cardElement);
