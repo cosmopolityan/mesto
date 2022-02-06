@@ -1,9 +1,6 @@
 import { openPopup } from './utils.js';
 import { closePopup } from './utils.js';
 
-const popupAdd = document.querySelector('#card_popup');
-const inputPhotoName = popupAdd.querySelector('#title'); //
-const inputPhotoLink = popupAdd.querySelector('#photo-link'); //
 const popupPhotos = document.querySelector('.popup-photo');
 const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
 const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
@@ -15,10 +12,6 @@ export default class Card {
     this._template = document.querySelector('#element-template').content;
     this._link = enableValidation.link;
     this._name = enableValidation.name;
-  }
-
-  _emptyInputValue(...inputs) {
-    inputs.map(elem => elem.value = '');
   }
 
   _getTemplate() {
