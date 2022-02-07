@@ -1,8 +1,6 @@
 // Refactoring:
-import { enableValidation } from './enableValidation.js';
-import { initialCards } from './initialCards.js';
-import { photosList, popupAdd, inputPhotoName, inputPhotoLink, editForm, addForm, submitEditButton, submitAddButton, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, nameInput, jobInput } from './consts.js';
-import { openPopup, closePopup } from './utils.js';
+import { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, editForm, addForm, submitEditButton, submitAddButton, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, nameInput, jobInput } from './utils/constants.js';
+import { openPopup, closePopup } from './utils/utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
@@ -56,7 +54,7 @@ initialCards.forEach((item) => {
 });
 //
 
-const cardSubmit = (evt) => {
+const submitCard = (evt) => {
   evt.preventDefault();
   const cardElement = createCard({name: inputPhotoName.value, link: inputPhotoLink.value});
   photosList.prepend(cardElement);
@@ -74,7 +72,7 @@ editForm.addEventListener('submit', (evt) => {
 
 addForm.addEventListener('submit', (evt) => {
   if (!addValidator.checkFormValidity()) {
-    cardSubmit(evt);
+    submitCard(evt);
   }
 });
 

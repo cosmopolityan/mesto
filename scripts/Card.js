@@ -1,5 +1,5 @@
-import { openPopup } from './utils.js';
-import { closePopup } from './utils.js';
+import { openPopup } from './utils/utils.js';
+import { closePopup } from './utils/utils.js';
 
 const popupPhotos = document.querySelector('.popup-photo');
 const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');

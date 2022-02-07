@@ -1,4 +1,4 @@
-import { popups } from './consts.js';
+import { popups } from './constants.js';
 // Открытие любого попапа
 
 const openPopup = (elem) => {

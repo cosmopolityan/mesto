@@ -1,3 +1,39 @@
+const initialCards = [
+  {
+    name: 'Камчатка',
+    link: 'images/kamchatka.jpg'
+  },
+  {
+    name: 'Мурманск',
+    link: 'images/murmansk.jpg'
+  },
+  {
+    name: 'Озеро Байкал',
+    link: 'images/baikal-lake.jpg'
+  },
+  {
+    name: 'Алтай',
+    link: 'images/altay.jpg'
+  },
+  {
+    name: 'Приморский край',
+    link: 'images/primorskiy-kray.jpg'
+  },
+  {
+    name: 'Башкирия',
+    link: 'images/poperechnaya-gora.jpg'
+  }
+];
+
+const enableValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
 const photosList = document.querySelector('.elements__list'); // изначально пустой <ul class="elements__list">
 
 const popupAdd = document.querySelector('#card_popup'); // попап добавления карточки
@@ -25,4 +61,4 @@ const nameInput = editForm.querySelector('.popup__input[name="name"]'); // по�
 const jobInput = editForm.querySelector('.popup__input[name="job"]'); // поле инпута (Профессия) в форме редактирования профиля
 
 
-export { photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, nameInput, jobInput };
+export { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, nameInput, jobInput };
