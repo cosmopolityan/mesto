@@ -1,6 +1,5 @@
 .popup-photo__box {
   position: relative;
-  /* margin: auto; */
-  /* margin-top: 18%; */
+  margin: auto;
   background-color: unset;
 }
