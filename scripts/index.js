@@ -1,13 +1,16 @@
 // Refactoring:
-import { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, editForm, addForm, submitEditButton, submitAddButton, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, nameInput, jobInput } from './utils/constants.js';
+import { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, editForm, addForm, submitEditButton, submitAddButton, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput } from './utils/constants.js';
 import { openPopup, closePopup } from './utils/utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 // Валидация
+// пока не понял как сделать, чтобы <p class="popup__error> удалялся, при закрытии заполненной с ошибками формы и повторном ее открытии.
 
 const editValidator = new FormValidator(enableValidation, profilePopup);
 const addValidator = new FormValidator(enableValidation, popupAdd);
+// const editValidatorEmpty = new FormValidator(enableValidation, profilePopup);
+// const addValidatorEmpty = new FormValidator(enableValidation, popupAdd);
 
 editValidator.enableValidation();
 addValidator.enableValidation();
@@ -21,6 +24,7 @@ const openAddPopup = () => {
   addValidator.setDisableButton(submitAddButton);
   addValidator.clearErrorElements();
   openPopup(popupAdd);
+  // resetValidation();
 };
 
 const openProfilePopup = () => {
@@ -30,6 +34,7 @@ const openProfilePopup = () => {
   editValidator.setAbleButton(submitEditButton);
   editValidator.clearErrorElements();
   openPopup(profilePopup);
+  //resetValidation();
 };
 
 const changeProfileData = (evt) => {
@@ -43,14 +48,20 @@ const changeProfileData = (evt) => {
 
 // **************
 
-const createCard = (obj) => {
-  const card = new Card(obj);
+// const createCard = (obj) => {
+//   const card = new Card(obj);
+//   return card.addPhotosElement();
+// };
+
+//test #1
+function createCard (item) {
+  const card = new Card(item, '#element-template');
   return card.addPhotosElement();
 };
+
 // Начальные карточки
 initialCards.forEach((item) => {
-  const cardElement = createCard(item);
-  photosList.append(cardElement);//
+  photosList.append(createCard(item));//
 });
 //
 
@@ -67,7 +78,7 @@ const submitCard = (evt) => {
 editForm.addEventListener('submit', (evt) => {
   if (!editValidator.checkFormValidity()) {
     changeProfileData(evt);
-  }
+  };
 });
 
 addForm.addEventListener('submit', (evt) => {
@@ -76,13 +87,17 @@ addForm.addEventListener('submit', (evt) => {
   }
 });
 
-const closeProfilePopup = () => {//
+const closeProfilePopup = () => {
   closePopup(profilePopup);
 };
 
-const closeAddPopup = () => {//
+const closeAddPopup = () => {
   closePopup(popupAdd);
 };
+
+const closePhoto = () => { //
+  closePopup(popupPhotos);
+}
 
 // EventListener'ы
 
@@ -94,4 +109,9 @@ profilePopupCloseButton.addEventListener('click', closeProfilePopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
 popupAddCloseButton.addEventListener('click', closeAddPopup);
 // добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
+popupPhotosCloseButton.addEventListener('click', closePhoto); //
+
+
+
+
 

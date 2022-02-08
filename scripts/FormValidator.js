@@ -9,6 +9,13 @@ export default class FormValidator {
     this._formElement = formElement;
   }
 
+  resetValidation() {
+    this._toggleButtonState(); //<== управляем кнопкой ==
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement) //<==очищаем ошибки ==
+    });
+  }
+
   _showInputError = (inputElement, errorMessage) => {
     const errorElement = this._formElement.querySelector(`.popup__error_type_${inputElement.id}`);
     inputElement.classList.add(this._inputErrorClass);

@@ -57,8 +57,9 @@ const jobElement = profileElement.querySelector('.profile__description'); // П�
 const profilePopup = document.querySelector('#profile_popup'); // попап редактирования профиля
 const profilePopupCloseButton = profilePopup.querySelector('.popup__close-button'); // кнопка закрытия попапа редактирования профиля
 const popupAddCloseButton = popupAdd.querySelector('.popup__close-button'); // кнопка закрытия попапа добавления карточки
+const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button'); // кнопка закрытия попапа открытой фотографии
 const nameInput = editForm.querySelector('.popup__input[name="name"]'); // поле инпута (Имя) в форме редактирования профиля
 const jobInput = editForm.querySelector('.popup__input[name="job"]'); // поле инпута (Профессия) в форме редактирования профиля
 
 
-export { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, nameInput, jobInput };
+export { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput };
