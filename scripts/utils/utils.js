@@ -1,3 +1,5 @@
+/*
+
 import { popups } from './constants.js';
 // Открытие любого попапа
 
@@ -29,3 +31,5 @@ popups.forEach(elem => {
 });
 
 export { openPopup, closePopup, closeEsc };
+
+*/

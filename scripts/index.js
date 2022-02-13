@@ -1,117 +1,84 @@
 // Refactoring:
 import { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, editForm, addForm, submitEditButton, submitAddButton, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput } from './utils/constants.js';
-import { openPopup, closePopup } from './utils/utils.js';
-import Card from './Card.js';
+// import { openPopup, closePopup } from './utils/utils.js';
+import { Card } from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
-// Валидация
-// пока не понял как сделать, чтобы <p class="popup__error> удалялся, при закрытии заполненной с ошибками формы и повторном ее открытии.
 
+// Валидация (работает):
 const editValidator = new FormValidator(enableValidation, profilePopup);
 const addValidator = new FormValidator(enableValidation, popupAdd);
-// const editValidatorEmpty = new FormValidator(enableValidation, profilePopup);
-// const addValidatorEmpty = new FormValidator(enableValidation, popupAdd);
-
 editValidator.enableValidation();
 addValidator.enableValidation();
-
 //
 
-const openAddPopup = () => {
-  inputPhotoName.value = '';
-  inputPhotoLink.value = '';
+// Карточка (работает)
+const popupImage = new PopupWithImage('.popup-photo');
+popupImage.setEventListeners();
 
-  addValidator.setDisableButton(submitAddButton);
-  addValidator.clearErrorElements();
-  openPopup(popupAdd);
-  // resetValidation();
-};
-
-const openProfilePopup = () => {
-  nameInput.value = nameElement.textContent;
-  jobInput.value = jobElement.textContent;
-
-  editValidator.setAbleButton(submitEditButton);
-  editValidator.clearErrorElements();
-  openPopup(profilePopup);
-  //resetValidation();
-};
-
-const changeProfileData = (evt) => {
-  evt.preventDefault();
-
-  nameElement.textContent = nameInput.value;
-  jobElement.textContent = jobInput.value;
-
-  closePopup(profilePopup);
-};
-
-// **************
-
-// const createCard = (obj) => {
-//   const card = new Card(obj);
-//   return card.addPhotosElement();
-// };
-
-//test #1
-function createCard (item) {
-  const card = new Card(item, '#element-template');
+function createCard(item) {
+  const card = new Card(item, '#element-template', () => {
+    popupImage.open({ link: item.link, name: item.name });
+  });
   return card.addPhotosElement();
-};
-
-// Начальные карточки
-initialCards.forEach((item) => {
-  photosList.append(createCard(item));//
-});
+}
 //
 
-const submitCard = (evt) => {
-  evt.preventDefault();
-  const cardElement = createCard({name: inputPhotoName.value, link: inputPhotoLink.value});
-  photosList.prepend(cardElement);
-  closePopup(popupAdd);
-  addForm.reset();
-};
+// Редактирование профиля (работает):
+const userInfo = new UserInfo({ nameSelector: '.profile__name', captionSelector: '.profile__description' });
 
-// ***************************************************************
-
-editForm.addEventListener('submit', (evt) => {
+const popupEdit = new PopupWithForm('#profile_popup', (formData) => {
   if (!editValidator.checkFormValidity()) {
-    changeProfileData(evt);
-  };
-});
-
-addForm.addEventListener('submit', (evt) => {
-  if (!addValidator.checkFormValidity()) {
-    submitCard(evt);
+    userInfo.setUserInfo(formData.name, formData.job);
+    popupEdit.close();
   }
 });
 
-const closeProfilePopup = () => {
-  closePopup(profilePopup);
-};
+popupEdit.setEventListeners();
 
-const closeAddPopup = () => {
-  closePopup(popupAdd);
-};
+editButton.addEventListener('click', () => {
+  const userInfoObject = userInfo.getUserInfo();
+  nameInput.value = userInfoObject.userName;
+  jobInput.value = userInfoObject.userCaption;
 
-const closePhoto = () => { //
-  closePopup(popupPhotos);
-}
+  editValidator.setAbleButton(submitEditButton);
+  editValidator.clearErrorElements();
+  popupEdit.open();
+});
+//
 
-// EventListener'ы
+// Начальные карточки (работает)
+const initialCardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    initialCardList.addItem(cardElement);
+  }
+}, '.elements__list');
 
-editButton.addEventListener('click', openProfilePopup);
-// добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
-addButton.addEventListener('click', openAddPopup);
-// добавленный ивентлиссенер по клику вызывает функцию popupOpen => попап открывается.
-profilePopupCloseButton.addEventListener('click', closeProfilePopup);
-// добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
-popupAddCloseButton.addEventListener('click', closeAddPopup);
-// добавленный ивентлиссенер по клику вызывает функцию popupToggle -> '.popup popup_opened' => '.popup'.
-popupPhotosCloseButton.addEventListener('click', closePhoto); //
+initialCardList.renderItems();
+//
+
+// Добавление (работает):
+const submitCard = new PopupWithForm('#card_popup', (dataForm) => {
+  if (!addValidator.checkFormValidity()) {
+    const cardElement = createCard({ link: dataForm.link, name: dataForm.title });
+    initialCardList.addNextItem(cardElement);
+
+    submitCard.close();
+  }
+});
+
+submitCard.setEventListeners();
 
 
+addButton.addEventListener('click', () => {
 
-
-
+  addValidator.setDisableButton(submitAddButton);
+  addValidator.clearErrorElements();
+  submitCard.open();
+});
