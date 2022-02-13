@@ -2,7 +2,7 @@
 
 ## Описание проекта
 
-Mesto - учебный проект, выполненный на 4, 5, 6 и 7 спринтах курса ["Веб-разработчик" от Яндекс.Практикум](https://practicum.yandex.ru/web).
+Mesto - учебный проект, выполненный на 4, 5, 6, 7 и 8 спринтах курса ["Веб-разработчик" от Яндекс.Практикум](https://practicum.yandex.ru/web).
 
 [Проект, размещенный на GitHub Pages](https://cosmopolityan.github.io/mesto/), представляет собой галерею с карточками (фотография + краткое описание места) по макетам из Figma:
 1. [Макет № 1](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1);
@@ -14,6 +14,7 @@ Mesto - учебный проект, выполненный на 4, 5, 6 и 7 с
 2. [Спринт № 5](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf);
 3. [Спринт № 6](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf);
 4. [Спринт № 7](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-7.pdf);
+5. [Спринт № 8](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-8.pdf);
 
 
 В качестве основных целей, преследуемых в ходе выполнения данной работы, стоит выделить:
@@ -39,6 +40,7 @@ Mesto - учебный проект, выполненный на 4, 5, 6 и 7 с
 
 * HTML5, CSS3 и JavaScript;
 * Структура файлов организована по [БЭМ-методологии](https://ru.bem.info/);
+* Сборка проекта осуществлена с помощью [Webpack](https://webpack.js.org/);
 * В ходе разработки активно использовались [Chrome DevTools](https://developer.chrome.com/docs/devtools/);
 * Работа с репозиторием велась с помощью VCS [Git](https://ru.wikipedia.org/wiki/Git);
 * Фотографии (из карточек) были размещены различными авторами на [Интернет-ресурсе со свободно распространяемым контентом](https://unsplash.com/), используются в данной работе согласно [лицензии](https://unsplash.com/license). Фотографии [оптимизированы для более быстрой загрузки](https://tinypng.com/).

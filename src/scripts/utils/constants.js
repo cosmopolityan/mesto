@@ -1,27 +1,34 @@
+import kamchatka from '../../images/kamchatka.jpg';
+import murmansk from '../../images/murmansk.jpg';
+import baikal from '../../images/baikal-lake.jpg';
+import altay from '../../images/altay.jpg';
+import primorskiy from '../../images/primorskiy-kray.jpg';
+import bashkiriya from '../../images/poperechnaya-gora.jpg';
+
 const initialCards = [
   {
     name: 'Камчатка',
-    link: 'images/kamchatka.jpg'
+    link: kamchatka
   },
   {
     name: 'Мурманск',
-    link: 'images/murmansk.jpg'
+    link: murmansk
   },
   {
     name: 'Озеро Байкал',
-    link: 'images/baikal-lake.jpg'
+    link: baikal
   },
   {
     name: 'Алтай',
-    link: 'images/altay.jpg'
+    link: altay
   },
   {
     name: 'Приморский край',
-    link: 'images/primorskiy-kray.jpg'
+    link: primorskiy
   },
   {
     name: 'Башкирия',
-    link: 'images/poperechnaya-gora.jpg'
+    link: bashkiriya
   }
 ];
 
