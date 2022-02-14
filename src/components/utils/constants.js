@@ -48,6 +48,8 @@ const inputPhotoName = popupAdd.querySelector('#title'); // input "Назван�
 const inputPhotoLink = popupAdd.querySelector('#photo-link'); // input "Ссылка на картинку"
 
 const popupPhotos = document.querySelector('.popup-photo'); // попап для открытия картинки (full)
+const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
+const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
 const popups = document.querySelectorAll('.popup'); // все попапы с классом .popup
 
 const editForm = document.querySelector('.popup__form[name="edit-profile_form"]'); // форма редактирования профиля ("edit-profile_form") внутри попапа.
@@ -68,5 +70,4 @@ const popupPhotosCloseButton = popupPhotos.querySelector('.popup__close-button')
 const nameInput = editForm.querySelector('.popup__input[name="name"]'); // поле инпута (Имя) в форме редактирования профиля
 const jobInput = editForm.querySelector('.popup__input[name="job"]'); // поле инпута (Профессия) в форме редактирования профиля
 
-
-export { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput };
+export { initialCards, enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popupPhotosImage, popupPhotosCaption, popups, editForm, addForm, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput };

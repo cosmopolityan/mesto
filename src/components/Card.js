@@ -1,7 +1,8 @@
-const popupPhotos = document.querySelector('.popup-photo');
-const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
-const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
+// const popupPhotos = document.querySelector('.popup-photo');
+// const popupPhotosImage = popupPhotos.querySelector('.popup-photo__image');
+// const popupPhotosCaption = popupPhotos.querySelector('.popup-photo__caption');
 
+import { popupPhotos, popupPhotosImage, popupPhotosCaption } from './utils/constants.js';
 
 class Card {
 
