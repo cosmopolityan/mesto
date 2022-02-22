@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Mesto</title>
-  <!-- <link rel="stylesheet" href="pages/index.css"> -->
 </head>
 
 <body class="page">
@@ -20,13 +19,16 @@
   <main class="content">
     <!-- PROFILE -->
     <section class="profile">
-      <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+      <div class="profile__avatar-block">
+        <img class="profile__avatar" src="#" alt="Ваш аватар">
+        <div class="profile__background"></div>
+      </div>
       <div class="profile__info">
         <div class="profile__container">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
         </div>
-        <p class="profile__description">Исследователь океана</p>
+        <p class="profile__description"></p>
       </div>
       <button type="button" class="profile__add-button" aria-label="Добавить новую карточку"></button>
     </section>
@@ -68,7 +70,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form popup__form_type_add" name="add-card_form" novalidate>
+      <form class="popup__form popup__form_type_add" name="add-card_form" action="#" method="POST" novalidate>
         <input type="text" id="title" class="popup__input popup__input_type_title" name="title" placeholder="Название"
           minlength="2" maxlength="30" required>
         <p class="popup__error popup__error_type_title" id="element-title-error"></p>
@@ -92,6 +94,31 @@
     </div>
   </div>
 
+  <!-- delete-card -->
+  <div class="popup" id="confirm-delete-card_popup">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form popup__form_type_del" name="del" action="#" method="DELETE" novalidate>
+        <button type="submit" class="popup__button" id="delete-card-button">Да</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- edit-avatar -->
+  <div class="popup" id="confirm-edit-profile-avatar_popup">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="edit-avatar" action="#" method="POST" novalidate>
+        <input type="url" name="avatar" placeholder="Вставьте ссылку на изображение" id="avatar"
+          class="popup__input popup__input_type_avatar" required>
+        <span class="popup__error popup__error_type_avatar"></span>
+        <button type="submit" class="popup__button" id="edit-profile-avatar-button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <!-- ELEMENTS-Template -->
   <template id="element-template">
     <li class="element">
@@ -100,12 +127,14 @@
       <button type="reset" class="element__trash-button"></button>
       <div class="element__container">
         <h2 class="element__title"></h2>
-        <button type="button" class="element__like-button"></button>
+        <div class="element__like">
+          <button type="button" class="element__like-button"></button>
+          <span class="element__likecounter">1</span>
+        </div>
       </div>
     </li>
   </template>
 
-  <!-- <script type="module" src="scripts/index.js"></script> -->
 </body>
 
 </html>
