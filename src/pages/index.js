@@ -1,5 +1,5 @@
 import './index.css';
-import { enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popupPhotosImage, popupPhotosCaption, popups, editForm, addForm, avatarBlock, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput, avatarPopup, avatarPopupCloseButton, submitDelButton, formElementAvatar, submitAvatarButton } from '../components/utils/constants.js';
+import { enableValidation, photosList, popupAdd, inputPhotoName, inputPhotoLink, popupPhotos, popupPhotosImage, popupPhotosCaption, popups, editForm, addForm, avatarBlock, submitEditButton, submitAddButton, profileElement, editButton, addButton, nameElement, jobElement, profilePopup, profilePopupCloseButton, popupAddCloseButton, popupPhotosCloseButton, nameInput, jobInput, avatarPopup, avatarPopupCloseButton, submitDelButton, formElementAvatar, submitAvatarButton } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -18,7 +18,9 @@ const renderLoading = (element, isLoading, initialText) => {
   }
 };
 
-//
+// Если честно, уже очень сильно запутался и не понимаю, как все должно работать.
+// Сейчас часть функционала сломалась и я не могу понять почему. Новые способы не работают, хотя по идее должны.
+// Не понимаю, как отрефакторить код с учетом замечаний, но чтобы оно заработало :(
 
 // User Info:
 const userInfo = new UserInfo({ nameSelector: '.profile__name', captionSelector: '.profile__description', avatarSelector: '.profile__avatar' });
@@ -134,7 +136,7 @@ const createCard = (item) => {
 // Попап редактирования профиля:
 
 const popupEdit = new PopupWithForm('#profile_popup', (formData) => {
-  if (!editValidator.checkFormValidity()) {
+  // if (!editValidator.checkFormValidity()) {
     renderLoading(submitEditButton, true);
     api.editProfileInfo({ name: formData.name, about: formData.job })
       .then((result) => {
@@ -147,7 +149,7 @@ const popupEdit = new PopupWithForm('#profile_popup', (formData) => {
       .finally(() => {
         renderLoading(submitEditButton, false, 'Сохранить')
       })
-  }
+  // }
 });
 
 popupEdit.setEventListeners();
@@ -157,8 +159,11 @@ editButton.addEventListener('click', () => {
   nameInput.value = userInfoObject.userName;
   jobInput.value = userInfoObject.userCaption;
 
-  editValidator.setAbleButton(submitEditButton);
-  editValidator.clearErrorElements();
+  //
+  //editValidator.setAbleButton(submitEditButton);
+  //editValidator.clearErrorElements();
+  //
+  editValidator._hideInputError;
   popupEdit.open();
 });
 //
@@ -186,9 +191,11 @@ submitCard.setEventListeners();
 
 
 addButton.addEventListener('click', () => {
-
-  addValidator.setDisableButton(submitAddButton);
-  addValidator.clearErrorElements();
+  //
+  //addValidator.setDisableButton(submitAddButton);
+  //addValidator.clearErrorElements();
+  //
+  addValidator._hideInputError;
   submitCard.open();
 });
 
@@ -213,8 +220,10 @@ const popupAvatar = new PopupWithForm('#confirm-edit-profile-avatar_popup', (for
 popupAvatar.setEventListeners();
 
 avatarBlock.addEventListener('click', () => {
-
-  avatarValidator.setDisableButton(submitAddButton)
-  avatarValidator.clearErrorElements();
+  //
+  //avatarValidator.setDisableButton(submitAvatarButton) // fix
+  //avatarValidator.clearErrorElements();
+  //
+  avatarValidator._hideInputError;
   popupAvatar.open();
 });

@@ -1,15 +1,15 @@
-import { popupPhotos, popupPhotosImage, popupPhotosCaption } from './utils/constants.js';
+// import { popupPhotos, popupPhotosImage, popupPhotosCaption } from '../utils/constants.js';
 
 class Card {
 
   constructor({ cardData, templateSelector, handleCardClick, handleLikeClick, handleDelClick, userId }) {
-    this._templateSelector = templateSelector;
+    // this._templateSelector = templateSelector;
+    this._templateSelector = document.querySelector('#element-template').content;
     this._name = cardData.name;
     this._link = cardData.link;
     this._ownerId = cardData.owner._id;
     this.likeCounter = cardData.likes.length;
     this.likeArr = cardData.likes;
-    this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDelClick = handleDelClick;
@@ -17,9 +17,7 @@ class Card {
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
-
-    return cardElement;
+    this._element = this._templateSelector.querySelector('.element').cloneNode(true);
   }
 
   // *****
@@ -44,12 +42,12 @@ class Card {
   // *****
 
   addPhotosElement() {
-    this._element = this._getTemplate();
+    this._getTemplate();
     this._element.querySelector('.element__title').textContent = this._name;
     this._image = this._element.querySelector('.element__image');
     this._image.alt = this._name;
     this._image.src = this._link;
-    this._element.querySelector('.element__likecounter').textContent = this.likeCounter;
+    this._element.querySelector('.element__likecounter').textContent = this.likeCounter; // нашли, но нам это не помогло
 
     this._renderDelElement();
     this._renderLikeElement();
@@ -68,6 +66,7 @@ class Card {
   }
 
   countLike() {
+    // к сожалению, не получается сделать по-другому, перебробовал по-разному, работает только так:
     this._element.querySelector('.element__likecounter').textContent = this.likeCounter;
   }
 
@@ -88,4 +87,4 @@ class Card {
   }
 }
 
-export { Card, popupPhotosImage, popupPhotosCaption };
+export { Card/*, popupPhotosImage, popupPhotosCaption*/ };
