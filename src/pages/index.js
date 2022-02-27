@@ -124,7 +124,7 @@ const createCard = (item) => {
     },
     userId: userId,
   });
-  // **
+
   return card.addPhotosElement();
 }
 //
@@ -132,7 +132,7 @@ const createCard = (item) => {
 // Попап редактирования профиля:
 
 const popupEdit = new PopupWithForm('#profile_popup', (formData) => {
-  // if (!editValidator.checkFormValidity()) {
+  if (!editValidator.checkFormValidity()) {
     renderLoading(submitEditButton, true);
     api.editProfileInfo({ name: formData.name, about: formData.job })
       .then((result) => {
@@ -145,7 +145,7 @@ const popupEdit = new PopupWithForm('#profile_popup', (formData) => {
       .finally(() => {
         renderLoading(submitEditButton, false, 'Сохранить')
       })
-  // }
+  }
 });
 
 popupEdit.setEventListeners();
@@ -154,14 +154,7 @@ editButton.addEventListener('click', () => {
   const userInfoObject = userInfo.getUserInfo();
   nameInput.value = userInfoObject.userName;
   jobInput.value = userInfoObject.userCaption;
-
-  editValidator.setDisableButton();
-  //
-  //editValidator.setAbleButton(submitEditButton);
-  // editValidator.setAbleButton();
-  //
-  // editValidator._hideInputError;
-  editValidator.hideInputError;
+  editValidator.resetValidation();
   popupEdit.open();
 });
 //
@@ -189,13 +182,7 @@ submitCard.setEventListeners();
 
 
 addButton.addEventListener('click', () => {
-  //
-  //addValidator.setDisableButton(submitAddButton);
-  addValidator.setDisableButton();
-  //addValidator.clearErrorElements();
-  //
-  // addValidator._hideInputError;
-  addValidator.hideInputError;
+  addValidator.resetValidation();
   submitCard.open();
 });
 
@@ -220,12 +207,6 @@ const popupAvatar = new PopupWithForm('#confirm-edit-profile-avatar_popup', (for
 popupAvatar.setEventListeners();
 
 avatarBlock.addEventListener('click', () => {
-  //
-  //avatarValidator.setDisableButton(submitAvatarButton) // fix
-  avatarValidator.setDisableButton();
-  //avatarValidator.clearErrorElements();
-  //
-  // avatarValidator._hideInputError;
-  avatarValidator.hideInputError;
+  avatarValidator.resetValidation();
   popupAvatar.open();
 });

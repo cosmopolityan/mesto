@@ -1,9 +1,6 @@
-// import { popupPhotos, popupPhotosImage, popupPhotosCaption } from '../utils/constants.js';
-
 class Card {
 
   constructor({ cardData, templateSelector, handleCardClick, handleLikeClick, handleDelClick, userId }) {
-    // this._templateSelector = templateSelector;
     this._templateSelector = document.querySelector('#element-template').content;
     this._name = cardData.name;
     this._link = cardData.link;
@@ -91,4 +88,4 @@ class Card {
   }
 }
 
-export { Card/*, popupPhotosImage, popupPhotosCaption*/ };
+export { Card };
