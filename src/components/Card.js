@@ -47,7 +47,12 @@ class Card {
     this._image = this._element.querySelector('.element__image');
     this._image.alt = this._name;
     this._image.src = this._link;
-    this._element.querySelector('.element__likecounter').textContent = this.likeCounter; // нашли, но нам это не помогло
+
+    this.elementLikesCount = this._element.querySelector('.element__likecounter');
+    this.elementLikesCount.textContent = this.likeCounter;
+
+
+    this.elementLikesButton = this._element.querySelector('.element__like-button');
 
     this._renderDelElement();
     this._renderLikeElement();
@@ -57,7 +62,7 @@ class Card {
   }
 
   likeCard() {
-    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+    this.elementLikesButton.classList.toggle('element__like-button_active');;
   }
 
 
@@ -66,8 +71,7 @@ class Card {
   }
 
   countLike() {
-    // к сожалению, не получается сделать по-другому, перебробовал по-разному, работает только так:
-    this._element.querySelector('.element__likecounter').textContent = this.likeCounter;
+    this.elementLikesCount.textContent = this.likeCounter;
   }
 
   _setEventListeners() {

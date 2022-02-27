@@ -18,10 +18,6 @@ const renderLoading = (element, isLoading, initialText) => {
   }
 };
 
-// Если честно, уже очень сильно запутался и не понимаю, как все должно работать.
-// Сейчас часть функционала сломалась и я не могу понять почему. Новые способы не работают, хотя по идее должны.
-// Не понимаю, как отрефакторить код с учетом замечаний, но чтобы оно заработало :(
-
 // User Info:
 const userInfo = new UserInfo({ nameSelector: '.profile__name', captionSelector: '.profile__description', avatarSelector: '.profile__avatar' });
 
@@ -29,7 +25,7 @@ const userInfo = new UserInfo({ nameSelector: '.profile__name', captionSelector:
 const popupImage = new PopupWithImage('.popup-photo');
 popupImage.setEventListeners();
 
-const popupDel = new PopupWithSubmit('#confirm-delete-card_popup') // через класс?
+const popupDel = new PopupWithSubmit('#confirm-delete-card_popup');
 popupDel.setEventListeners();
 
 
@@ -159,11 +155,13 @@ editButton.addEventListener('click', () => {
   nameInput.value = userInfoObject.userName;
   jobInput.value = userInfoObject.userCaption;
 
+  editValidator.setDisableButton();
   //
   //editValidator.setAbleButton(submitEditButton);
-  //editValidator.clearErrorElements();
+  // editValidator.setAbleButton();
   //
-  editValidator._hideInputError;
+  // editValidator._hideInputError;
+  editValidator.hideInputError;
   popupEdit.open();
 });
 //
@@ -193,9 +191,11 @@ submitCard.setEventListeners();
 addButton.addEventListener('click', () => {
   //
   //addValidator.setDisableButton(submitAddButton);
+  addValidator.setDisableButton();
   //addValidator.clearErrorElements();
   //
-  addValidator._hideInputError;
+  // addValidator._hideInputError;
+  addValidator.hideInputError;
   submitCard.open();
 });
 
@@ -222,8 +222,10 @@ popupAvatar.setEventListeners();
 avatarBlock.addEventListener('click', () => {
   //
   //avatarValidator.setDisableButton(submitAvatarButton) // fix
+  avatarValidator.setDisableButton();
   //avatarValidator.clearErrorElements();
   //
-  avatarValidator._hideInputError;
+  // avatarValidator._hideInputError;
+  avatarValidator.hideInputError;
   popupAvatar.open();
 });
